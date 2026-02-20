@@ -30,6 +30,14 @@
         @keyframes glow {
             0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 135, 0.3); }
             50% { box-shadow: 0 0 40px rgba(0, 255, 135, 0.5); }
+       }
+        @keyframes bonusPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 16px rgba(0, 255, 135, 0.25), inset 0 1px 0 rgba(255,255,255,0.15); }
+            50% { transform: scale(1.035); box-shadow: 0 0 28px rgba(0, 255, 135, 0.45), inset 0 1px 0 rgba(255,255,255,0.2); }
+        }
+        @keyframes glossShimmer {
+            0% { left: -100%; }
+            60%, 100% { left: 160%; }
         }
         .animate-fade-in-up { animation: fadeInUp 0.6s ease-out both; }
         .animate-fade-in { animation: fadeIn 0.5s ease-out both; }
@@ -46,6 +54,47 @@
         .delay-700 { animation-delay: 0.7s; }
         .delay-800 { animation-delay: 0.8s; }
         .btn-hover:hover { transform: scale(1.02); transition: transform 0.2s ease; }
+
+        /* $20 Sign Up Bonus Badge */
+        #bonus-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #0d2e1a 0%, #0a2015 50%, #0d2e1a 100%);
+            border: 1.5px solid rgba(0, 255, 135, 0.55);
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            animation: bonusPulse 2.6s ease-in-out infinite, fadeInUp 0.6s ease-out both;
+            animation-delay: 0s, 0.15s;
+            cursor: default;
+            margin-bottom: 18px;
+        }
+        #bonus-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            animation: glossShimmer 3s ease-in-out infinite;
+        }
+        #bonus-badge .badge-text {
+            font-size: 15px;
+            font-weight: 700;
+            color: #00ff87;
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 1;
+        }
+        #bonus-badge .badge-icon {
+            font-size: 17px;
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+        }
     </style>
 <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/262ed4a3-44fa-4ff4-9cf8-4eb2af24b480/id-preview-eb0c021a--b3587589-4d7b-4c11-81e0-6a31ccdde7e9.lovable.app-1770234862553.png" /></head>
 <body style="margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0a0f0a 0%, #0d1a0d 50%, #0a0f0a 100%); min-height: 100vh; position: relative; overflow-x: hidden;">
@@ -328,3 +377,4 @@
 </body>
 
 </html>
+
