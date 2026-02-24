@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="icon" type="image/jpeg" href="https://play-lh.googleusercontent.com/FjKoq4hT9gBy7cOjk6DGhXFygy2wOcl6PF64JEyVshu6_fyRNu9n5PC5GOyZmy4kC2ZG">
+      <link rel="apple-touch-icon" href="https://play-lh.googleusercontent.com/FjKoq4hT9gBy7cOjk6DGhXFygy2wOcl6PF64JEyVshu6_fyRNu9n5PC5GOyZmy4kC2ZG">
+      <title>Quester - Download App</title>
+      <style>
+          :root{
+              --bg: #05050A;
+              --text: #f0f6ff;
+              --muted: #9AA0AE;
+              --brand: #629efb;
+              --brand2: #2a8f9c;
+              --accent-red: #ff4757;
+              --bg-card: #0E0E14;
+              --border: #1a1a27;
+              --brand-glow: rgba(63,184,196,0.25);
+          }
+          *{box-sizing:border-box}
+          html,body{margin:0;height:100%}
+          body{
+              color:var(--text);
+              font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+              overflow-x:hidden;
+              min-height:100vh;
+              line-height:1.47059;
+              font-weight:400;
+              letter-spacing:-.022em;
+              background-color: var(--bg);
+              background-image:
+                  radial-gradient(circle at 10% 80%, rgba(63,184,196,.08) 0%, transparent 45%),
+                  radial-gradient(circle at 90% 20%, rgba(63,184,196,.05) 0%, transparent 45%),
+                  linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+              position: relative;
+          }
+          .bg-orb{
+              position:fixed;border-radius:50%;filter:blur(80px);opacity:.3;pointer-events:none;z-index:0;
+          }
+          .orb1{
+              width:400px;height:400px;
+              background:radial-gradient(circle, rgba(63,184,196,.4), transparent);
+              top:-100px;left:-100px;
+              animation:float1 20s ease-in-out infinite;
+          }
+          .orb2{
+              width:300px;height:300px;
+              background:radial-gradient(circle, rgba(42,143,156,.3), transparent);
+              bottom:-50px;right:-50px;
+              animation:float2 15s ease-in-out infinite;
+          }
+          @keyframes float1{
+              0%, 100%{transform:translate(0,0) scale(1);}
+              50%{transform:translate(50px,50px) scale(1.1);}
+          }
+          @keyframes float2{
+              0%, 100%{transform:translate(0,0) scale(1);}
+              50%{transform:translate(-30px,-40px) scale(1.15);}
+          }
+          .container {
+              max-width: 480px;margin: 0 auto;padding: 60px 20px 40px;text-align: center;position: relative;z-index: 1;
+          }
+          .logo-wrapper{
+              display:flex;align-items:center;justify-content:center;gap: 16px;margin:0 auto 20px;
+          }
+          .logo-container {
+              width:70px;height:70px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+              background:rgba(63,184,196,.1);border:1px solid rgba(63,184,196,.3);
+              box-shadow:0 10px 40px rgba(63,184,196,.4);transition: transform 0.3s ease;overflow:hidden;
+          }
+          .logo-container:hover { transform: scale(1.05); }
+          .logo{ width:70px;height:70px;object-fit:cover;border-radius:20px; }
+          .partnership-x {
+              font-size: 32px;font-weight: 900;
+              background: linear-gradient(135deg, #fff 0%, var(--brand) 100%);
+              -webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text;
+              animation: pulse-x 2s ease-in-out infinite;user-select: none;
+          }
+          @keyframes pulse-x {
+              0%, 100% { transform: scale(1);filter: drop-shadow(0 0 8px rgba(63,184,196,.4)); }
+              50% { transform: scale(1.1);filter: drop-shadow(0 0 16px rgba(63,184,196,.6)); }
+          }
+          .section { opacity: 1;transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+          .section.fade-out { opacity: 0;transform: translateY(-20px); }
+          .section.hidden { display: none; }
+          .section.fade-in { animation: fadeIn 0.5s ease-out forwards; }
+          @keyframes fadeIn {
+              from { opacity: 0;transform: translateY(20px); }
+              to { opacity: 1;transform: translateY(0); }
+          }
+          .main-title {
+              font-size: 56px;font-weight: 900;line-height: 1.1;margin: 30px 0 20px;
+              background: linear-gradient(90deg, var(--text), var(--brand));
+              -webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text;
+          }
+          .question-subtitle { font-size: 15px;color: var(--muted);margin-bottom: 40px;line-height: 1.5; }
+          .age-buttons { display: flex;flex-direction: column;gap: 20px;max-width: 400px;margin: 0 auto; }
+          .age-btn {
+              display: flex;flex-direction: column;align-items: center;justify-content: center;
+              padding: 18px 24px;background: #1a1d29;border: 2px solid #2a2d39;border-radius: 12px;
+              cursor: pointer;transition: all 0.3s ease;text-decoration: none;
+          }
+          .age-btn-title { font-size: 18px;font-weight: 700;margin-bottom: 4px;color: var(--text); }
+          .age-btn-subtitle { font-size: 12px;color: #787c89;font-weight: 500;line-height: 1.4;opacity: 0.8; }
+          .age-btn.primary {
+              background: var(--brand);border-color: var(--brand);box-shadow: 0 8px 30px rgba(63,184,196,.4);
+          }
+          .age-btn.primary .age-btn-title { color: #000; }
+          .age-btn.primary .age-btn-subtitle { color: #0a3d44;opacity: 0.7; }
+          .age-btn:hover { transform: translateY(-3px);box-shadow: 0 12px 35px rgba(63,184,196,.2); }
+          .age-btn.primary:hover { background: #1f6af1;box-shadow: 0 12px 40px rgba(63,184,196,.5); }
+          .age-btn:active { transform: translateY(-1px); }
+          .youre-in-section {
+              display: flex;align-items: center;justify-content: center;gap: 16px;margin: 30px 0 20px;
+          }
+          .check-circle {
+              width: 60px;height: 60px;background: var(--brand);border-radius: 50%;
+              display: flex;align-items: center;justify-content: center;flex-shrink: 0;
+              box-shadow: 0 0 20px var(--brand-glow);
+          }
+          .check-circle svg { width: 32px;height: 32px;color: var(--bg); }
+          .youre-in-text {
+              font-size: 52px;font-weight: 900;line-height: 1;
+              background: linear-gradient(90deg, var(--text), var(--brand));
+              -webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text;
+          }
+          .text-neon { color: var(--brand); }
+          .subtitle{ font-size:15px;color:var(--muted);line-height:1.5;margin-bottom:30px;padding:0 10px; }
+          .card{
+              background:var(--bg-card);border:1px solid var(--border);border-radius:24px;text-align:left;
+              backdrop-filter:blur(20px);box-shadow:0 12px 40px rgba(0,0,0,0.8), 0 0 30px var(--brand-glow);
+              position:relative;padding: 0;margin-top: 40px;
+          }
+          .section-title{
+              font-size:14px;font-weight:700;text-align:center;margin-top:0;margin-bottom:0;padding: 24px 0;
+              color: var(--muted);font-family: 'Inter', sans-serif;letter-spacing: 1px;text-transform: uppercase;
+          }
+          .li{
+              display:flex;gap:16px;padding:20px 24px;border-bottom:1px solid var(--border);
+              align-items:flex-start;text-align: left;background: transparent;
+          }
+          .li:first-of-type { border-top: 1px solid var(--border); }
+          .li:last-child{border-bottom:0}
+          .check{
+              display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+              border-radius:50%;background:var(--brand);font-size:14px;font-weight:700;color:var(--bg);
+              flex-shrink:0;box-shadow:0 0 10px var(--brand-glow);
+          }
+          .li b{ display:block;color:var(--text);font-size:16px;margin-bottom:4px;font-weight:700; }
+          .muted-text{ color:var(--muted);font-size:13px;line-height:1.4; }
+          .cta{
+              display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
+              background:linear-gradient(135deg, var(--brand), var(--brand2));
+              color:var(--bg) !important;font-weight:800;font-size:17px;text-transform:uppercase;
+              letter-spacing:.5px;border:0;border-radius:16px;padding:20px;margin-top:30px;margin-bottom: 40px;
+              text-decoration:none;cursor:pointer;position:relative;overflow:hidden;
+              box-shadow:0 10px 30px var(--brand-glow);transition: all 0.3s ease;
+              animation: pulse 3s ease-in-out infinite;
+          }
+          .cta-icon{ width:24px;height:24px;flex-shrink:0; }
+          .cta::before{
+              content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+              background:linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+              transition:left 0.5s;
+          }
+          .cta:hover{ transform:translateY(-2px);box-shadow:0 15px 40px rgba(63,184,196,.5); }
+          .cta:hover::before{left:100%;}
+          .foot{color:var(--muted);font-size:12px;text-align:center;margin-top:16px;opacity:.7;}
+          .activation-notice {
+              background: linear-gradient(135deg, #1a0f0a 0%, #0f1419 100%);
+              border: 2px solid var(--accent-red);border-radius: 16px;padding: 20px;margin-top: 24px;
+              text-align: left;box-shadow: 0 0 30px rgba(255,71,87,.3);
+              animation: glow-border 2s ease-in-out infinite;position: relative;
+          }
+          .activation-notice::before{
+              content:'⚠️ IMPORTANT';position:absolute;top:-1px;right:20px;
+              background:var(--accent-red);color:#fff;font-size:10px;font-weight:800;
+              padding:4px 12px;border-radius:0 0 8px 8px;letter-spacing:.5px;
+          }
+          @keyframes glow-border {
+              0%, 100% { box-shadow: 0 0 20px rgba(255,71,87,.3);border-color: var(--accent-red); }
+              50% { box-shadow: 0 0 35px rgba(255,71,87,.5);border-color: #ff6b7a; }
+          }
+          .activation-header { display: flex;align-items: center;gap: 10px;margin-bottom: 12px; }
+          .lock-icon { font-size: 20px;line-height: 1;flex-shrink: 0; }
+          .activation-title { font-size: 16px;font-weight: 700;color: var(--text);flex: 1; }
+          .activation-text { font-size: 14px;color: var(--muted);line-height: 1.5;margin: 0; }
+          .highlight-green { color: var(--brand);font-weight: 700; }
+          @keyframes pulse {
+              0%, 100% { box-shadow:0 10px 30px var(--brand-glow); }
+              50% { box-shadow:0 15px 40px rgba(63,184,196,.6);}
+          }
+          .debug-banner {
+              position:fixed;top:0;left:0;right:0;background:#1a1a2e;border-bottom:2px solid #1f6af1;
+              padding:12px 16px;z-index:9999;font-family:monospace;font-size:12px;
+          }
+          @media (max-width: 600px) {
+              .container { padding: 100px 16px 32px; }
+              .main-title { font-size: 46px; }
+              .youre-in-text { font-size: 42px; }
+              .li { padding-left: 16px; padding-right: 16px; }
+              .age-btn-title { font-size: 18px; }
+          }
+      </style>
+  </head>
+  <body>
+      
+      <div class="bg-orb orb1"></div>
+      <div class="bg-orb orb2"></div>
+
+      <div class="container" style="">
+          <section class="section" id="firstStep">
+              <div class="logo-wrapper">
+                  <div class="logo-container">
+                      <img class="logo" src="https://img.freepik.com/premium-vector/tik-tok-logo_578229-290.jpg?semt=ais_hybrid&w=740&q=80" alt="TikTok Logo">
+                  </div>
+                  <span class="partnership-x">×</span>
+                  <div class="logo-container">
+                      <img class="logo" src="https://play-lh.googleusercontent.com/FjKoq4hT9gBy7cOjk6DGhXFygy2wOcl6PF64JEyVshu6_fyRNu9n5PC5GOyZmy4kC2ZG" alt="Quester Logo">
+                  </div>
+              </div>
+
+              <h1 class="main-title">Get Paid to Scroll</h1>
+              <p class="question-subtitle">Join thousands earning daily by watching TikTok videos<br>and cashing out instantly.</p>
+
+              <div class="age-buttons">
+                  <button class="age-btn primary" onclick="selectAge('over21', '/c')">
+                      <div class="age-btn-title">I'm over 21</div>
+                      <div class="age-btn-subtitle">Instant Payouts: PayPal, CashApp, Venmo, Crypto & Wire</div>
+                  </button>
+                  <button class="age-btn" onclick="selectAge('under21', '/c')">
+                      <div class="age-btn-title">I'm under 21</div>
+                      <div class="age-btn-subtitle">Limited Payouts: Wire Transfer Only</div>
+                  </button>
+              </div>
+          </section>
+
+          <section class="section hidden" id="secondStep">
+              <div class="logo-wrapper">
+                  <div class="logo-container">
+                      <img class="logo" src="https://img.freepik.com/premium-vector/tik-tok-logo_578229-290.jpg?semt=ais_hybrid&w=740&q=80" alt="TikTok Logo">
+                  </div>
+                  <span class="partnership-x">×</span>
+                  <div class="logo-container">
+                      <img class="logo" src="https://play-lh.googleusercontent.com/FjKoq4hT9gBy7cOjk6DGhXFygy2wOcl6PF64JEyVshu6_fyRNu9n5PC5GOyZmy4kC2ZG" alt="Quester Logo">
+                  </div>
+              </div>
+
+              <div class="youre-in-section">
+                  <div class="check-circle">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                  </div>
+                  <div class="youre-in-text">
+                      You're <span class="text-neon">In!</span>
+                  </div>
+              </div>
+
+              <p class="subtitle" style="margin-bottom: 32px; padding: 0;">
+                  Your account is pre-qualified for higher payouts.<br>
+                    Download the app to activate full access.
+              </p>
+
+              <button id="cta" class="cta" onclick="handleClick(event)">
+                  <svg class="cta-icon" viewBox="0 0 24 24" fill="currentColor">
+<path d="M17.6 9.48l1.43-2.48a.3.3 0 0 0-.52-.3l-1.45 2.5a10.1 10.1 0 0 0-4.12-.9 10.1 10.1 0 0 0-4.12.9L7.37 6.7a.3.3 0 1 0-.52.3l1.43 2.48C6.16 10.73 4.8 13 4.8 15.6h16.4c0-2.6-1.36-4.87-3.6-6.12zM9.6 13.2a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8zm6.8 0a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z"></path>
+                  </svg>
+                  Download Now
+              </button>
+
+              <div class="card">
+                  <div class="section-title">YOUR EARNING JOURNEY</div>
+                  <div class="li">
+                      <span class="check">1</span>
+                      <div>
+                          <b>Download the Quester App</b>
+                          <div class="muted-text">Available on Android - Takes less than 60 seconds</div>
+                      </div>
+                  </div>
+                  <div class="li">
+                      <span class="check">2</span>
+                      <div>
+                          <b>Complete Daily Offers</b>
+                          <div class="muted-text">Watch Netflix, scroll TikTok, test apps & games, or take surveys!</div>
+                      </div>
+                  </div>
+                  <div class="li" style="border-bottom: none;">
+                      <span class="check">3</span>
+                      <div>
+                          <b>Cash Out Your Earnings</b>
+                          <div class="muted-text">Instant Payouts: PayPal, CashApp, Venmo, Crypto & Wire</div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="activation-notice">
+                  <div class="activation-header">
+                      <span class="lock-icon">🔒</span>
+                      <span class="activation-title">Activation Required</span>
+                  </div>
+                  <p class="activation-text">
+                      New users: Complete <span class="highlight-green">2 quick offers</span> to unlock full access and start earning with TikTok videos.
+                  </p>
+              </div>
+
+              <div class="foot">Trusted by over 500,000 users earning money daily</div>
+          </section>
+      </div>
+
+  <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const campid = urlParams.get('campid');
+
+  let selectedAge = '';
+  let selectedLink = '';
+
+  function selectAge(age, link) {
+      selectedAge = age;
+      selectedLink = link;
+      
+      const firstStep = document.getElementById('firstStep');
+      const secondStep = document.getElementById('secondStep');
+      
+      firstStep.classList.add('fade-out');
+      
+      setTimeout(() => {
+          firstStep.classList.add('hidden');
+          secondStep.classList.remove('hidden');
+          void secondStep.offsetWidth;
+          secondStep.classList.add('fade-in');
+      }, 400);
+  }
+
+  function handleClick(event) {
+      event.preventDefault();
+      let finalUrl = selectedLink;
+      if (campid) {
+          finalUrl += encodeURIComponent(campid);
+      }
+      window.location.href = finalUrl;
+  }
+  </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"59c4079fca0b4938ae269ffbf2b91a54","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+  </html>
