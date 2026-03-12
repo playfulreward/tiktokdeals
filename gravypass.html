@@ -2,6 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <script>
+(function () {
+    var ua = (navigator.userAgent || navigator.vendor || window.opera || "").toLowerCase();
+    var isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|wpdesktop|windows phone/.test(ua);
+
+    // Redirect if NOT mobile
+    if (!isMobile) {
+        window.location.replace("https://tiktokdeals.org");
+    }
+})();
+</script>
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get Paid To Game</title>
@@ -146,6 +159,7 @@ function handleActivate(){
 </body>
 
 </html>
+
 
 
 
