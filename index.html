@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -165,35 +166,53 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 
 /* Bonus box */
 .bonus-box{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:center;gap:12px;
   width:100%;max-width:420px;
-  background:linear-gradient(135deg,rgba(0,230,118,0.07) 0%,rgba(0,230,118,0.03) 100%);
-  border:1px solid rgba(0,230,118,0.22);
-  border-radius:16px;
-  padding:20px 24px;
+  background:linear-gradient(180deg,hsla(160,100%,40%,0.15) 0%,hsla(160,100%,25%,0.06) 100%);
+  border:1px solid hsla(160,100%,50%,0.35);
+  border-radius:12px;
+  padding:14px 24px;
   margin-bottom:20px;
-  gap:4px;
-  text-align:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 18px hsla(160,100%,50%,0.1),inset 0 0 20px hsla(160,100%,50%,0.04);
+}
+/* Top gloss sheen */
+.bonus-box::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:50%;
+  background:linear-gradient(180deg,hsla(0,0%,100%,0.10) 0%,hsla(0,0%,100%,0.01) 100%);
+  border-radius:12px 12px 0 0;
+  pointer-events:none;
+}
+/* Shimmer sweep */
+.bonus-box::after{
+  content:'';
+  position:absolute;top:-60%;left:-75%;width:40%;height:220%;
+  background:linear-gradient(105deg,transparent 40%,hsla(0,0%,100%,0.10) 50%,transparent 60%);
+  animation:bonusShimmer 3.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes bonusShimmer{
+  0%{left:-75%}
+  60%,100%{left:130%}
+}
+.bonus-emoji{font-size:26px;line-height:1;flex-shrink:0;position:relative;z-index:1}
+.bonus-text-col{display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;z-index:1}
+.bonus-amount{
+  font-size:18px;font-weight:800;line-height:1;
+  color:hsl(160,100%,55%);
+  letter-spacing:-0.01em;
+  text-shadow:0 0 12px hsla(160,100%,50%,0.5);
+}
+.bonus-desc{
+  font-size:10px;font-weight:700;letter-spacing:0.14em;
+  color:hsla(0,0%,100%,0.55);text-transform:uppercase;
 }
 .bonus-box-left{display:contents}
 .bonus-box-divider{display:none}
 .bonus-box-right{display:contents}
-.bonus-amount{
-  font-size:38px;font-weight:900;line-height:1;
-  background:linear-gradient(180deg,hsl(160,100%,65%) 0%,hsl(160,100%,45%) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 14px hsla(160,100%,50%,0.45));
-  letter-spacing:-0.02em;
-}
-.bonus-label{
-  font-size:9px;font-weight:800;letter-spacing:0.16em;
-  color:hsl(160,100%,55%);text-transform:uppercase;opacity:0.75;
-  margin-bottom:2px;
-}
-.bonus-desc{
-  font-size:9px;font-weight:800;letter-spacing:0.16em;
-  color:#fff;text-transform:uppercase;opacity:0.85;
-}
+.bonus-label{display:none}
 .bonus-sub{display:none}
 </style>
 </head>
@@ -212,9 +231,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
       <span>Bonus expires in &nbsp;<span id="timerDisplay" style="font-variant-numeric:tabular-nums">15:00</span></span>
     </div>
     <div class="bonus-box anim" style="animation-delay:0.08s">
-      <span class="bonus-amount">$10</span>
-      <span class="bonus-label">FREE BONUS</span>
-      <span class="bonus-desc">YOURS WHEN YOU REGISTER TODAY</span>
+      <span class="bonus-emoji">🎁</span>
+      <div class="bonus-text-col">
+        <span class="bonus-amount">$10 Sign-Up Bonus</span>
+        <span class="bonus-desc">FREE WHEN YOU SIGN UP TODAY</span>
+      </div>
     </div>
     <h1 class="headline anim" style="animation-delay:0.1s">Get Paid For Your Screentime</h1>
     <p class="subtext anim" style="animation-delay:0.2s">Join thousands earning daily by starting your first offer today and cash out instantly.</p>
