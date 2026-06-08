@@ -20,17 +20,17 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 .timer-bar svg{flex-shrink:0;animation:pulse-red 1s ease-in-out infinite}
 @keyframes pulse-red{0%,100%{opacity:1}50%{opacity:0.5}}
 
-.headline{font-size:clamp(1.8rem,5.5vw,2.8rem);font-weight:800;line-height:1.15;letter-spacing:-0.02em;background:linear-gradient(180deg,#fff 0%,hsl(160,30%,60%) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;margin-bottom:16px;filter:drop-shadow(0 0 40px hsla(160,100%,50%,0.15))}
-.subtext{color:hsla(0,0%,100%,0.5);font-size:15px;line-height:1.6;max-width:400px;margin-bottom:24px}
-.btn-neon{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:420px;padding:20px 40px;border:none;border-radius:16px;cursor:pointer;background:linear-gradient(180deg,hsl(160,100%,55%) 0%,hsl(160,100%,45%) 100%);box-shadow:0 0 30px hsla(160,100%,50%,0.5),0 0 60px hsla(160,100%,50%,0.25),0 4px 15px hsla(0,0%,0%,0.3);transition:all 0.2s ease;margin-bottom:12px}
+.headline{font-size:clamp(36px,10vw,52px);font-weight:900;line-height:1.1;letter-spacing:-0.03em;background:linear-gradient(180deg,#fff 0%,hsl(160,30%,60%) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;margin-bottom:24px;filter:drop-shadow(0 0 40px hsla(160,100%,50%,0.15))}
+.subtext{color:hsla(0,0%,100%,0.5);font-size:16px;line-height:1.5;max-width:400px;margin-bottom:28px}
+.btn-neon{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:420px;padding:20px 24px;border:none;border-radius:16px;cursor:pointer;background:linear-gradient(180deg,hsl(160,100%,55%) 0%,hsl(160,100%,45%) 100%);box-shadow:0 0 30px hsla(160,100%,50%,0.5),0 0 60px hsla(160,100%,50%,0.25),0 4px 15px hsla(0,0%,0%,0.3);transition:all 0.2s ease;margin-bottom:12px}
 .btn-neon:hover{transform:translateY(-2px);box-shadow:0 0 40px hsla(160,100%,50%,0.6),0 0 80px hsla(160,100%,50%,0.3),0 8px 25px hsla(0,0%,0%,0.4)}
 .btn-neon:active{transform:translateY(1px) scale(0.98);box-shadow:0 0 20px hsla(160,100%,50%,0.4),0 0 40px hsla(160,100%,50%,0.2)}
 .btn-neon .main{font-size:20px;font-weight:700;color:hsl(160,20%,5%)}
-.btn-neon .sub{font-size:12px;color:hsla(160,20%,5%,0.7)}
-.btn-dark{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:420px;padding:20px 40px;border:1px solid hsla(160,15%,30%,0.5);border-radius:16px;cursor:pointer;background:hsla(160,10%,15%,0.3);transition:all 0.2s ease}
+.btn-neon .sub{font-size:13px;color:hsla(160,20%,5%,0.7);font-weight:500;line-height:1.4}
+.btn-dark{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:420px;padding:20px 24px;border:1px solid hsla(160,15%,30%,0.5);border-radius:16px;cursor:pointer;background:hsla(160,10%,15%,0.3);transition:all 0.2s ease}
 .btn-dark:hover{background:hsla(160,10%,15%,0.5)}
 .btn-dark .main{font-size:20px;font-weight:700;color:#fff}
-.btn-dark .sub{font-size:12px;color:hsla(0,0%,100%,0.5)}
+.btn-dark .sub{font-size:13px;color:hsla(0,0%,100%,0.5);font-weight:500;line-height:1.4}
 
 /* Activate button — green pill, dark text, pulsing green glow */
 .btn-activate{
@@ -73,7 +73,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 
 .check-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
 .check-circle{width:40px;height:40px;border-radius:50%;background:hsl(160,100%,50%);display:flex;align-items:center;justify-content:center}
-.youre-in{font-size:clamp(2.2rem,6vw,3rem);font-weight:800;background:linear-gradient(180deg,#fff 0%,hsl(160,30%,60%) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.youre-in{font-size:clamp(36px,10vw,52px);font-weight:900;line-height:1.1;letter-spacing:-0.03em;background:linear-gradient(180deg,#fff 0%,hsl(160,30%,60%) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* Paid to users ticker */
 .dollar-counter{text-align:center;margin-bottom:16px}
@@ -155,8 +155,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 @keyframes fadeSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .screen{
   display:flex;flex-direction:column;align-items:center;text-align:center;
-  width:100%;padding:64px 24px 48px;
+  width:100%;padding:40px 20px 48px;
   transition:opacity 0.45s cubic-bezier(0.16,1,0.3,1),transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+#screenA{
+  min-height:100vh;
+  justify-content:center;
 }
 .screen.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;right:0;transform:translateY(-12px)}
 .screen.visible{opacity:1;transform:translateY(0)}
@@ -204,7 +208,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
       <span>x</span>
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv4Pc8AG4kae6zRE0gmI4vi2Qsixpn7k5KBA&s" alt="GP">
     </div>
-    <div class="check-row anim" style="animation-delay:0.07s">
+    <div class="check-row anim" style="animation-delay:0.07s;margin:30px 0 20px">
       <div class="check-circle">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10l3.5 3.5L15 7" stroke="hsl(160,20%,5%)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
@@ -212,24 +216,24 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
     </div>
 
     <!-- Paid to users ticker -->
-    <div class="dollar-counter anim" style="animation-delay:0.12s">
+    <div class="dollar-counter anim" style="animation-delay:0.12s;margin-bottom:8px">
       <span>💰 <span id="paidTicker">$50,002,588</span>+ paid to users</span>
     </div>
 
-    <p class="subtext anim" style="animation-delay:0.17s;margin-bottom:20px">Add Gravy Pass to your wallet to activate your <strong style="color:hsl(160,100%,50%)">$1 bonus</strong> and start earning today.</p>
+    <p class="subtext anim" style="animation-delay:0.17s;margin-bottom:24px;padding:0">Add Gravy Pass to your wallet to activate your <strong style="color:hsl(160,100%,50%)">$1 bonus</strong> and start earning today.</p>
     <button class="btn-activate anim" id="activateBtn" style="animation-delay:0.22s;max-width:100%" onclick="handleActivate()">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="6" width="20" height="14" rx="3" stroke="hsl(160,20%,5%)" stroke-width="2"/><path d="M2 10h20" stroke="hsl(160,20%,5%)" stroke-width="2"/><path d="M16 15h2" stroke="hsl(160,20%,5%)" stroke-width="2" stroke-linecap="round"/><path d="M6 3l12 0" stroke="hsl(160,20%,5%)" stroke-width="2" stroke-linecap="round"/></svg>
       <span>ACTIVATE WALLET — CLAIM $1 BONUS</span>
     </button>
-    <div class="card-dark anim" style="animation-delay:0.22s">
+    <div class="card-dark anim" style="animation-delay:0.22s;margin-top:24px">
       <h3 style="text-align:center;font-size:11px;font-weight:700;letter-spacing:0.15em;color:hsla(0,0%,100%,0.4);margin:0;padding:20px 0;text-transform:uppercase">YOUR EARNING JOURNEY</h3>
       <div class="step"><div class="step-num">1</div><div><h4>Add Gravy Pass to Your Wallet</h4><p>Available on Apple Wallet (iOS) &amp; Google Wallet (Android)<br>Takes less than 60 seconds • No app download required</p></div></div>
-      <div class="step"><div class="step-num">2</div><div><h4>Complete Starter Offers</h4><p>Play games, try apps, or complete simple challenges<br>Unlock access to popular gaming rewards. (Roblox, Block Blast, 8 Ball Pool)</p></div></div>
-      <div class="step"><div class="step-num">3</div><div><h4>Get Paid Instantly</h4><p>Earnings are credited directly to your Apple Wallet or Google Wallet<br>No cashout apps. No waiting.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><h4>Complete Starter Offers</h4><p>Play games, try apps, or complete simple challenges. Unlock access to popular gaming rewards. (Roblox, Block Blast, 8 Ball Pool)</p></div></div>
+      <div class="step"><div class="step-num">3</div><div><h4>Get Paid Instantly</h4><p>Earnings are credited directly to your Apple Wallet or Google Wallet. No cashout apps. No waiting.</p></div></div>
     </div>
 
     <!-- Important card -->
-    <div class="card-important anim" style="animation-delay:0.3s">
+    <div class="card-important anim" style="animation-delay:0.3s;margin:20px 0">
       <div class="badge">
         <span class="badge-icon">🔓</span>
         <span class="badge-title">IMPORTANT</span>
