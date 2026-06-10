@@ -8,9 +8,9 @@
 <title>Get Paid For Your Screentime</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:hsl(160,20%,5%);color:#fff;min-height:100vh;overflow-x:hidden}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:hsl(160,20%,5%);color:#fff;min-height:100vh;overflow-x:hidden;overflow-y:auto}
 .bg-glow{position:fixed;inset:0;background:radial-gradient(ellipse at center,hsla(160,100%,30%,0.12) 0%,transparent 60%),radial-gradient(ellipse at center,hsla(160,100%,20%,0.08) 0%,transparent 80%),hsl(160,20%,5%);z-index:0}
-.container{position:relative;z-index:1;width:100%;max-width:540px;margin:0 auto;padding:0;min-height:100vh}
+.container{position:relative;z-index:1;width:100%;max-width:540px;margin:0 auto;padding:0}
 .logo-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .logo-row img{width:56px;height:56px;border-radius:12px;box-shadow:0 0 20px hsla(160,100%,50%,0.15)}
 .logo-row span{color:hsla(0,0%,100%,0.5);font-size:20px;font-weight:500}
@@ -109,6 +109,33 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
   margin-bottom:20px;
   font-size:13px;font-weight:600;color:#00e676;
 }
+
+/* ── Mobile: compress screen B to show important card without scrolling ── */
+@media(max-width:480px){
+  #screenB{padding:20px 16px 60px}
+  #screenB .check-row{margin:16px 0 8px}
+  #screenB .youre-in{font-size:clamp(28px,9vw,40px)}
+  #screenB .check-circle{width:32px;height:32px}
+  #screenB .check-circle svg{width:16px;height:16px}
+  #screenB .dollar-counter{margin-bottom:4px}
+  #screenB .subtext{font-size:14px;margin-bottom:12px}
+  #screenB .btn-activate{padding:14px 20px;margin-bottom:12px}
+  #screenB .btn-activate span{font-size:13px}
+  #screenB .btn-activate svg{width:18px;height:18px}
+  .card-dark{margin-top:0}
+  .card-dark h3{padding:12px 0;font-size:10px}
+  .step{padding:10px 16px}
+  .step h4{font-size:13px;margin-bottom:2px}
+  .step p{font-size:11px;line-height:1.35}
+  .step-num{width:20px;height:20px;font-size:10px}
+  .card-important{padding:12px 16px;margin:8px 0}
+  .badge-title{font-size:13px}
+  .card-important p{font-size:11px;line-height:1.4}
+  .badge{margin-bottom:6px}
+  .card-important .inner{gap:6px}
+  #screenB .live-bar{margin-bottom:8px;padding:8px 16px;font-size:12px}
+  #screenB .footer{font-size:11px;margin-top:4px}
+}
 .live-dot{
   width:8px;height:8px;border-radius:50%;
   background:#00e676;flex-shrink:0;
@@ -161,6 +188,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 #screenA{
   min-height:100vh;
   justify-content:center;
+}
+#screenB{
+  min-height:100vh;
+  justify-content:flex-start;
+  padding-bottom:80px;
 }
 .screen.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;right:0;transform:translateY(-12px)}
 .screen.visible{opacity:1;transform:translateY(0)}
@@ -227,9 +259,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
     </button>
     <div class="card-dark anim" style="animation-delay:0.22s;margin-top:24px">
       <h3 style="text-align:center;font-size:11px;font-weight:700;letter-spacing:0.15em;color:hsla(0,0%,100%,0.4);margin:0;padding:20px 0;text-transform:uppercase">YOUR EARNING JOURNEY</h3>
-      <div class="step"><div class="step-num">1</div><div><h4>Add Gravy Pass to Your Wallet</h4><p>Available on Apple Wallet (iOS) &amp; Google Wallet (Android)<br>One tap to get started • No app download required</p></div></div>
+      <div class="step"><div class="step-num">1</div><div><h4>Add Gravy Pass to Your Wallet</h4><p>Available on Apple Wallet (iOS) &amp; Google Wallet (Android)<br>Takes less than 60 seconds • No app download required</p></div></div>
       <div class="step"><div class="step-num">2</div><div><h4>Complete Starter Offers</h4><p>Play games, try apps, or complete simple challenges. Unlock access to popular gaming rewards. (Roblox, Block Blast, 8 Ball Pool)</p></div></div>
-      <div class="step"><div class="step-num">3</div><div><h4>Get Paid Instantly</h4><p>Cash out your earnings instantly to Apple Wallet or Google Wallet — no waiting, no limits.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div><h4>Get Paid Instantly</h4><p>Earnings are credited directly to your Apple Wallet or Google Wallet. No cashout apps. No waiting.</p></div></div>
     </div>
 
     <!-- Important card -->
@@ -239,8 +271,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
         <span class="badge-title">IMPORTANT</span>
       </div>
       <div class="inner">
-        <p>New users: complete <strong>2 quick offers</strong> to unlock access to Roblox, Block Blast, high-paying gaming rewards, and TikTok paid-to-scroll tasks.</p>
-        <p>Your first gaming offer (<em>~3–5 minutes</em>) activates your account and unlocks exclusive high-paying tasks. <strong>New high-paying offers ($75+/hr) coming soon.</strong> — complete your starter offer now.</p>
+        <p>New users: complete <strong>2 quick offers</strong> to unlock full access and start earning with paid-to-scroll.</p>
+        <p>Your first gaming offer (<em>~3–5 minutes</em>) activates your wallet and unlocks TikTok scroll tasks. <strong>Instagram Reels tasks coming soon</strong> — complete your starter offer now so you're ready.</p>
       </div>
     </div>
     <!-- People earning counter — standalone -->
@@ -324,7 +356,7 @@ function showScreenB(){
     b.style.opacity = '1';
     b.style.transform = 'translateY(0)';
     b.classList.add('visible');
-    window.scrollTo(0, 0);
+    window.scrollTo({top:0, behavior:'instant'});
 
     // Start glow-pulse on button after its fade-in finishes (0.22s delay + 0.5s duration)
     setTimeout(function() {
