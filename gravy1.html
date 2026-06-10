@@ -100,12 +100,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 .card-important p em{color:hsl(160,100%,55%);font-style:normal;font-weight:600}
 
 /* ── FLOATING BG LOGOS ── */
-.floating-logos{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;display:none}
-#screenB.visible ~ * .floating-logos,
-.floating-logos.active{display:block}
-.float-logo{position:absolute;border-radius:18px;opacity:0;animation:floatDrift linear infinite}
+.floating-logos{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.float-logo{position:absolute;border-radius:18px;opacity:0;bottom:-60px;animation:floatDrift linear infinite}
 @keyframes floatDrift{
-  0%{transform:translateY(30px) rotate(-5deg) scale(0.9);opacity:0}
+  0%{transform:translateY(0) rotate(-5deg) scale(0.9);opacity:0}
   4%{opacity:0.07}
   90%{opacity:0.07}
   100%{transform:translateY(-110vh) rotate(8deg) scale(1.05);opacity:0}
@@ -438,14 +436,543 @@ function showScreenB(){
         btn.style.opacity = '1';
         btn.style.animation = 'glow-pulse 2.4s ease-in-out infinite';
       }
-      // Activate floating logos
-      var logos = document.getElementById('floatingLogos');
-      if(logos){
-        logos.classList.add('active');
-        logos.querySelectorAll('.float-logo').forEach(function(img){
-          img.style.bottom = '-60px';
-          img.style.top = 'auto';
-        });
+    }, 750);
+  }, 420);
+}
+/* ── TOAST NOTIFICATIONS ── */
+(function(){
+  var names = [
+    'Sarah M.','Jake T.','Emily R.','Marcus L.','Olivia P.','Daniel K.','Sophia W.',
+    'Liam H.','Ava C.','Noah B.','Mia G.','Ethan D.','Isabella F.','Mason J.',
+    'Charlotte A.','James V.','Amelia S.','Benjamin N.','Harper Z.','Lucas Q.'
+  ];
+  var earnMsgs = [
+    'just earned $4.50 playing 8 Ball Pool',
+    'earned $6.75 scrolling TikTok',
+    'made $3.80 playing Block Blast',
+    'earned $8.20 playing Monopoly Go',
+    'just got $5.10 from Coin Master',
+    'earned $7.00 playing Solitaire Cash',
+    'made $4.25 from Dice Dreams',
+    'earned $9.50 playing 8 Ball Pool',
+    'got $3.60 scrolling TikTok',
+    'earned $6.00 playing Block Blast'
+  ];
+  var withdrawMsgs = [
+    'withdrew $12.00 to Apple Wallet',
+    'cashed out $18.50 to Google Wallet',
+    'withdrew $25.00 to Apple Wallet',
+    'cashed out $9.75 to Google Wallet',
+    'withdrew $15.00 to Apple Wallet',
+    'cashed out $32.00 to Google Wallet',
+    'withdrew $8.50 to Apple Wallet',
+    'cashed out $21.00 to Google Wallet'
+  ];
+
+  var stack = document.getElementById('notifStack');
+  var busy = false;
+
+  function showToast(){
+    if(busy || !stack) return;
+    busy = true;
+    var name = names[Math.floor(Math.random() * names.length)];
+    // 55% earn, 45% withdraw
+    var msgs = Math.random() < 0.55 ? earnMsgs : withdrawMsgs;
+    var msg = msgs[Math.floor(Math.random() * msgs.length)];
+    var mins = Math.floor(Math.random() * 5) + 1;
+
+    var toast = document.createElement('div');
+    toast.className = 'notif-toast';
+    toast.innerHTML =
+      '<div class="notif-avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv4Pc8AG4kae6zRE0gmI4vi2Qsixpn7k5KBA&s" alt="GP"></div>' +
+      '<div class="notif-body">' +
+        '<div class="notif-name">' + name + '</div>' +
+        '<div class="notif-msg">' + msg + '</div>' +
+      '</div>' +
+      '<div class="notif-time">' + mins + 'm ago</div>';
+
+    stack.appendChild(toast);
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ toast.classList.add('show'); });
+    });
+    setTimeout(function(){
+      toast.classList.remove('show');
+      toast.classList.add('hide');
+      setTimeout(function(){
+        if(toast.parentNode) toast.parentNode.removeChild(toast);
+        busy = false;
+      }, 400);
+    }, 3500);
+  }
+
+  setTimeout(showToast, 2500);
+  setInterval(function(){
+    showToast();
+  }, Math.floor(Math.random() * 4000) + 6000);
+})();
+function isAndroid(){
+  return /android/i.test(navigator.userAgent);
+}
+function handleActivate(){
+  var params=new URLSearchParams(window.location.search);
+  var allowed=['sub1','sub2','sub3','sub4','sub5'];
+  var filtered=new URLSearchParams();
+  allowed.forEach(function(k){
+    var v=params.get(k);
+    if(v!==null)filtered.set(k,v);
+  });
+  var qs=filtered.toString();
+  var base='https://www.phef6trk.com/QZ85XF/33MS3M8/';
+  var url=qs?base+'?'+qs:base;
+  if(isAndroid()){
+    var encoded=encodeURIComponent(url);
+    var intentUrl='intent://'+url.replace(/^https?:\/\//,'')+'#Intent;scheme=https;action=android.intent.action.VIEW;package=com.android.chrome;S.browser_fallback_url='+encoded+';end';
+    window.location.href=intentUrl;
+  } else {
+    var safariUrl=url.replace(/^https:\/\//,'x-safari-https://');
+    window.location.href=safariUrl;
+  }
+}
+</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Get Paid For Your Screentime</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:hsl(160,20%,5%);color:#fff;min-height:100vh;overflow-x:hidden;overflow-y:auto}
+.bg-glow{position:fixed;inset:0;background:radial-gradient(ellipse at center,hsla(160,100%,30%,0.12) 0%,transparent 60%),radial-gradient(ellipse at center,hsla(160,100%,20%,0.08) 0%,transparent 80%),hsl(160,20%,5%);z-index:0}
+.container{position:relative;z-index:1;width:100%;max-width:540px;margin:0 auto;padding:0}
+.logo-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.logo-row img{width:56px;height:56px;border-radius:12px;box-shadow:0 0 20px hsla(160,100%,50%,0.15)}
+.logo-row span{color:hsla(0,0%,100%,0.5);font-size:20px;font-weight:500}
+
+/* Timer */
+.timer-bar{display:inline-flex;align-items:center;gap:8px;background:rgba(255,71,87,0.08);border:1px solid rgba(255,71,87,0.15);border-radius:100px;padding:10px 20px;margin-bottom:18px;font-size:13px;font-weight:700;color:#ff4757}
+.timer-bar svg{flex-shrink:0;animation:pulse-red 1s ease-in-out infinite}
+@keyframes pulse-red{0%,100%{opacity:1}50%{opacity:0.5}}
+
+.headline{font-size:clamp(36px,10vw,52px);font-weight:900;line-height:1.1;letter-spacing:-0.03em;background:linear-gradient(180deg,#fff 0%,hsl(160,30%,60%) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;margin-bottom:24px;filter:drop-shadow(0 0 40px hsla(160,100%,50%,0.15))}
+.subtext{color:hsla(0,0%,100%,0.5);font-size:16px;line-height:1.5;max-width:400px;margin-bottom:28px}
+.btn-neon{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:420px;padding:20px 24px;border:none;border-radius:16px;cursor:pointer;background:linear-gradient(180deg,hsl(160,100%,55%) 0%,hsl(160,100%,45%) 100%);box-shadow:0 0 30px hsla(160,100%,50%,0.5),0 0 60px hsla(160,100%,50%,0.25),0 4px 15px hsla(0,0%,0%,0.3);transition:all 0.2s ease;margin-bottom:12px}
+.btn-neon:hover{transform:translateY(-2px);box-shadow:0 0 40px hsla(160,100%,50%,0.6),0 0 80px hsla(160,100%,50%,0.3),0 8px 25px hsla(0,0%,0%,0.4)}
+.btn-neon:active{transform:translateY(1px) scale(0.98);box-shadow:0 0 20px hsla(160,100%,50%,0.4),0 0 40px hsla(160,100%,50%,0.2)}
+.btn-neon .main{font-size:20px;font-weight:700;color:hsl(160,20%,5%)}
+.btn-neon .sub{font-size:13px;color:hsla(160,20%,5%,0.7);font-weight:500;line-height:1.4}
+.btn-dark{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:420px;padding:20px 24px;border:1px solid hsla(160,15%,30%,0.5);border-radius:16px;cursor:pointer;background:hsla(160,10%,15%,0.3);transition:all 0.2s ease}
+.btn-dark:hover{background:hsla(160,10%,15%,0.5)}
+.btn-dark .main{font-size:20px;font-weight:700;color:#fff}
+.btn-dark .sub{font-size:13px;color:hsla(0,0%,100%,0.5);font-weight:500;line-height:1.4}
+
+/* Activate button — green pill, dark text, pulsing green glow */
+.btn-activate{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;max-width:420px;padding:20px 32px;
+  border:none;border-radius:14px;cursor:pointer;
+  position:relative;overflow:hidden;opacity:1;
+  background:linear-gradient(180deg,hsl(160,100%,55%) 0%,hsl(160,100%,43%) 100%);
+  transition:transform 0.2s ease,filter 0.2s ease;
+  margin-bottom:20px;
+}
+/* Top gloss sheen */
+.btn-activate::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:48%;
+  background:linear-gradient(180deg,hsla(0,0%,100%,0.30) 0%,hsla(0,0%,100%,0.03) 100%);
+  border-radius:14px 14px 0 0;
+  pointer-events:none;
+}
+/* Shimmer sweep */
+.btn-activate::after{
+  content:'';
+  position:absolute;top:-60%;left:-75%;width:45%;height:220%;
+  background:linear-gradient(105deg,transparent 40%,hsla(0,0%,100%,0.20) 50%,transparent 60%);
+  animation:shimmer 3.2s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes shimmer{
+  0%{left:-75%}
+  60%,100%{left:130%}
+}
+@keyframes glow-pulse{
+  0%,100%{box-shadow:0 0 25px hsla(160,100%,50%,0.55),0 0 55px hsla(160,100%,50%,0.25),0 4px 15px hsla(0,0%,0%,0.35)}
+  50%{box-shadow:0 0 45px hsla(160,100%,50%,0.80),0 0 90px hsla(160,100%,50%,0.42),0 4px 20px hsla(0,0%,0%,0.4)}
+}
+.btn-activate:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn-activate:active{transform:translateY(1px) scale(0.98)}
+.btn-activate span{font-size:16px;font-weight:800;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:hsl(160,20%,5%);letter-spacing:0.5px;text-transform:uppercase;position:relative;z-index:1;white-space:nowrap}
+.btn-activate svg{flex-shrink:0;position:relative;z-index:1}
+
+.check-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.check-circle{width:40px;height:40px;border-radius:50%;background:hsl(160,100%,50%);display:flex;align-items:center;justify-content:center}
+.youre-in{font-size:clamp(36px,10vw,52px);font-weight:900;line-height:1.1;letter-spacing:-0.03em;background:linear-gradient(180deg,#fff 0%,hsl(160,30%,60%) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Paid to users ticker */
+.dollar-counter{text-align:center;margin-bottom:16px}
+.dollar-counter span{font-size:13px;font-weight:600;color:hsl(160,100%,60%);font-variant-numeric:tabular-nums;text-shadow:0 0 10px rgba(0,255,136,.3)}
+
+/* YOUR EARNING JOURNEY card — reference site style */
+.card-dark{background:#0E0E14;border:1px solid #1a1a27;border-radius:24px;width:100%;text-align:left;box-shadow:0 12px 40px rgba(0,0,0,0.8),0 0 30px rgba(0,255,136,0.25);margin-bottom:20px;padding:0}
+.card-dark h3{text-align:center;font-size:11px;font-weight:700;letter-spacing:0.15em;color:hsla(0,0%,100%,0.4);margin:0;padding:20px 0;text-transform:uppercase}
+.step{display:flex;gap:16px;padding:18px 24px;border-bottom:1px solid #1a1a27;align-items:flex-start}
+.step:first-of-type{border-top:1px solid #1a1a27}
+.step:last-child{border-bottom:none}
+.step-num{width:24px;height:24px;border-radius:50%;background:hsl(160,100%,50%);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:hsl(160,20%,5%);flex-shrink:0;box-shadow:0 0 10px rgba(0,255,136,0.25)}
+.step h4{font-size:15px;font-weight:700;margin-bottom:4px;color:#fff}
+.step p{font-size:13px;color:#9AA0AE;line-height:1.4}
+
+/* IMPORTANT card — reference site activation-card style */
+.card-important{background:linear-gradient(135deg,rgba(255,71,87,0.08),rgba(255,71,87,0.02));border:1px solid rgba(255,71,87,0.25);border-radius:20px;padding:20px 24px;width:100%;text-align:left;position:relative;margin-bottom:16px}
+.badge{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.badge-icon{font-size:18px}
+.badge-title{font-size:15px;font-weight:800;color:#ff4757}
+.card-important .inner{display:flex;flex-direction:column;gap:10px}
+.card-important p{font-size:13px;color:#9AA0AE;line-height:1.6;margin:0}
+.card-important p strong{color:#fff;font-weight:700}
+.card-important p em{color:hsl(160,100%,55%);font-style:normal;font-weight:600}
+
+/* ── FLOATING BG LOGOS ── */
+.floating-logos{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.float-logo{position:absolute;border-radius:18px;opacity:0;bottom:-60px;animation:floatDrift linear infinite}
+@keyframes floatDrift{
+  0%{transform:translateY(0) rotate(-5deg) scale(0.9);opacity:0}
+  4%{opacity:0.07}
+  90%{opacity:0.07}
+  100%{transform:translateY(-110vh) rotate(8deg) scale(1.05);opacity:0}
+}
+
+.live-bar{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:rgba(0,230,118,0.05);
+  border:1px solid rgba(0,230,118,0.12);
+  border-radius:100px;
+  padding:10px 20px;
+  margin-bottom:20px;
+  font-size:13px;font-weight:600;color:#00e676;
+}
+
+/* ── OFFER ICONS ROW ── */
+.offer-icons{width:100%;background:#0c0c10;border:1px solid rgba(255,255,255,0.07);border-radius:18px 18px 0 0;padding:16px 12px 16px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:0;overflow:hidden}
+.offer-side{display:flex;flex-direction:column;gap:10px}
+.offer-side-label{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-align:center}
+.offer-side.starter .offer-side-label{color:#00e676}
+.offer-side.locked-side .offer-side-label{color:#f5c842;letter-spacing:1.6px}
+.offer-side-icons{display:flex;align-items:flex-start;justify-content:center;gap:8px}
+.offer-icon{display:flex;flex-direction:column;align-items:center;gap:5px;width:52px}
+.offer-icon img{width:48px;height:48px;border-radius:13px;object-fit:cover;display:block;background:#1a1a20;flex-shrink:0}
+.offer-side.starter .offer-icon img{border:1.5px solid rgba(0,230,118,0.28)}
+.offer-side.locked-side .offer-icon img{border:1.5px solid rgba(245,200,66,0.35);box-shadow:0 0 12px rgba(245,200,66,0.12)}
+.offer-icon-wrap{position:relative;display:inline-block;width:48px;height:48px;flex-shrink:0}
+.offer-icon-wrap img{width:48px;height:48px;border-radius:13px;object-fit:cover;display:block;background:#1a1a20}
+.offer-icon-wrap .lock-overlay{position:absolute;inset:0;border-radius:13px;background:rgba(0,0,0,0.65);display:flex;align-items:center;justify-content:center}
+.offer-icon-name{font-size:9px;font-weight:600;letter-spacing:0.1px;text-align:center;line-height:1.2;width:100%;word-break:break-word;hyphens:auto}
+.offer-side.starter .offer-icon-name{color:rgba(255,255,255,0.45)}
+.offer-side.locked-side .offer-icon-name{color:rgba(245,200,66,0.55)}
+.offer-track{display:flex;align-items:center;gap:3px;justify-content:center;padding:0 4px}
+.offer-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.offer-seg{height:2px;border-radius:1px;flex:1}
+.offer-dot.on{background:#00e676}
+.offer-dot.off{background:#f5c842;opacity:0.35}
+.offer-seg.on{background:rgba(0,230,118,0.4)}
+.offer-seg.off{background:rgba(245,200,66,0.2)}
+.offer-divider-line{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;align-self:stretch;gap:6px}
+.offer-divider-line .dline{width:1px;flex:1;background:rgba(255,255,255,0.07)}
+.offer-divider-badge{width:28px;height:28px;border-radius:50%;background:#0c0c10;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:380px){
+  .offer-icon img{width:42px;height:42px;border-radius:11px}
+  .offer-icon{width:46px}
+  .offer-side-icons{gap:5px}
+  .offer-divider-line{padding:0 7px}
+}
+@media(max-width:480px){
+  #screenB{padding:20px 16px 60px}
+  #screenB .check-row{margin:16px 0 8px}
+  #screenB .youre-in{font-size:clamp(28px,9vw,40px)}
+  #screenB .check-circle{width:32px;height:32px}
+  #screenB .check-circle svg{width:16px;height:16px}
+  #screenB .dollar-counter{margin-bottom:4px}
+  #screenB .subtext{font-size:14px;margin-bottom:12px}
+  #screenB .btn-activate{padding:14px 20px;margin-bottom:12px}
+  #screenB .btn-activate span{font-size:13px}
+  #screenB .btn-activate svg{width:18px;height:18px}
+  .card-dark{margin-top:0}
+  .card-dark h3{padding:12px 0;font-size:10px}
+  .step{padding:10px 16px}
+  .step h4{font-size:13px;margin-bottom:2px}
+  .step p{font-size:11px;line-height:1.35}
+  .step-num{width:20px;height:20px;font-size:10px}
+  .card-important{padding:12px 16px;margin:8px 0}
+  .badge-title{font-size:13px}
+  .card-important p{font-size:11px;line-height:1.4}
+  .badge{margin-bottom:6px}
+  .card-important .inner{gap:6px}
+  #screenB .live-bar{margin-bottom:8px;padding:8px 16px;font-size:12px}
+  #screenB .footer{font-size:11px;margin-top:4px}
+}
+.live-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#00e676;flex-shrink:0;
+  animation:livePulse 2s ease-in-out infinite;
+  box-shadow:0 0 6px rgba(0,230,118,0.6);
+}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+.live-bar span{color:#8888a0;font-weight:500}
+.live-bar span b{color:#00e676;font-weight:700}
+
+.footer{font-size:12px;color:hsla(0,0%,100%,0.4);margin-top:8px}
+
+/* ── TOAST NOTIFICATIONS ── */
+.notif-stack{
+  position:fixed;top:12px;left:50%;transform:translateX(-50%);
+  z-index:200;width:90%;max-width:370px;
+  display:flex;flex-direction:column;gap:8px;pointer-events:none;
+}
+.notif-toast{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(17,17,24,0.95);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(0,230,118,0.18);
+  border-radius:14px;padding:12px 14px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.7),0 0 16px rgba(0,230,118,0.08);
+  opacity:0;transform:translateY(-16px) scale(0.96);
+  transition:all 0.38s cubic-bezier(0.16,1,0.3,1);
+  pointer-events:auto;
+}
+.notif-toast.show{opacity:1;transform:translateY(0) scale(1)}
+.notif-toast.hide{opacity:0;transform:translateY(-10px) scale(0.96)}
+.notif-avatar{
+  width:34px;height:34px;border-radius:9px;
+  background:rgba(0,230,118,0.12);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;
+}
+.notif-avatar img{width:34px;height:34px;object-fit:cover;border-radius:9px}
+.notif-body{flex:1;min-width:0}
+.notif-name{font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif-msg{font-size:11px;color:#00e676;font-weight:600;margin-top:1px}
+.notif-time{font-size:10px;color:#8888a0;flex-shrink:0;white-space:nowrap}
+.anim{opacity:0;animation:fadeSlideUp 0.5s cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.screen{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  width:100%;padding:40px 20px 48px;
+  transition:opacity 0.45s cubic-bezier(0.16,1,0.3,1),transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+#screenA{
+  min-height:100vh;
+  justify-content:center;
+}
+#screenB{
+  min-height:100vh;
+  justify-content:flex-start;
+  padding-bottom:80px;
+}
+.screen.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;right:0;transform:translateY(-12px)}
+.screen.visible{opacity:1;transform:translateY(0)}
+.screen-b-enter{opacity:0;transform:translateY(18px)}
+.screen-b-enter.screen-b-active{opacity:1;transform:translateY(0);transition:opacity 0.5s cubic-bezier(0.16,1,0.3,1),transform 0.5s cubic-bezier(0.16,1,0.3,1)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="notif-stack" id="notifStack"></div>
+<div class="floating-logos" id="floatingLogos">
+  <img class="float-logo" src="https://m.media-amazon.com/images/I/81Iaj1F8MxL.png" alt="" style="width:52px;height:52px;left:8%;animation-duration:18s;animation-delay:0s">
+  <img class="float-logo" src="https://downloadr2.apkmirror.com/wp-content/uploads/2024/11/55/675856d843c0b_com.moonactive.coinmaster-384x384.png" alt="" style="width:44px;height:44px;left:78%;animation-duration:22s;animation-delay:3s">
+  <img class="float-logo" src="https://play-lh.googleusercontent.com/KPBcFtNGNn3cMtgFthtbrWL0COVs5bINj1aQYniBa6JxgI-FAkce2czhVONttEtLQXnfd0X5rHA6YGMHp3nfWw" alt="" style="width:48px;height:48px;left:55%;animation-duration:20s;animation-delay:7s">
+  <img class="float-logo" src="https://m.media-amazon.com/images/I/81OMgLAhLCL.png" alt="" style="width:46px;height:46px;left:22%;animation-duration:24s;animation-delay:2s">
+  <img class="float-logo" src="https://img.tapimg.net/market/images/2922882f732138250882e5515f62a675.png" alt="" style="width:50px;height:50px;left:88%;animation-duration:19s;animation-delay:1s">
+  <img class="float-logo" src="https://img.magnific.com/premium-vector/tik-tok-logo_578229-290.jpg" alt="" style="width:44px;height:44px;left:40%;animation-duration:21s;animation-delay:4s">
+</div>
+
+<div class="container">
+  <!-- Screen A -->
+  <div id="screenA" class="screen visible">
+    <div class="logo-row anim" style="animation-delay:0s">
+      <img src="https://img.freepik.com/premium-vector/tik-tok-logo_578229-290.jpg?w=740&q=80" alt="TikTok">
+      <span>x</span>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv4Pc8AG4kae6zRE0gmI4vi2Qsixpn7k5KBA&s" alt="GP">
+    </div>
+    <div class="timer-bar anim" style="animation-delay:0.05s">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="hsl(0,80%,65%)" stroke-width="2"/><path d="M12 7v5l3 3" stroke="hsl(0,80%,65%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Offer expires in &nbsp;<span id="timerDisplay" style="font-variant-numeric:tabular-nums">15:00</span></span>
+    </div>
+    <h1 class="headline anim" style="animation-delay:0.1s">Get Paid For Your Screentime</h1>
+    <p class="subtext anim" style="animation-delay:0.2s">Join thousands earning daily by playing popular games like Roblox, Block Blast, 8 Ball Pool, etc.</p>
+    <button class="btn-neon anim" style="animation-delay:0.3s" onclick="showScreenB()">
+      <span class="main">I'm over 21</span>
+      <span class="sub">Instant Payouts: Apple Wallet, Google Wallet, or Wire</span>
+    </button>
+    <button class="btn-dark anim" style="animation-delay:0.4s" onclick="showScreenB()">
+      <span class="main">I'm under 21</span>
+      <span class="sub">Limited Payouts: Wire Transfer Only</span>
+    </button>
+    <div class="live-bar anim" style="animation-delay:0.5s;margin-top:16px">
+      <span class="live-dot"></span>
+      <span><b id="liveUsersA">12,856</b> people earning right now</span>
+    </div>
+  </div>
+
+  <!-- Screen B -->
+  <div id="screenB" class="screen hidden" style="display:none">
+    <div class="logo-row anim" style="animation-delay:0s">
+      <img src="https://img.freepik.com/premium-vector/tik-tok-logo_578229-290.jpg?w=740&q=80" alt="TikTok">
+      <span>x</span>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv4Pc8AG4kae6zRE0gmI4vi2Qsixpn7k5KBA&s" alt="GP">
+    </div>
+    <div class="check-row anim" style="animation-delay:0.07s;margin:30px 0 20px">
+      <div class="check-circle">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10l3.5 3.5L15 7" stroke="hsl(160,20%,5%)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="youre-in">You're In!</span>
+    </div>
+
+    <!-- Paid to users ticker -->
+    <div class="dollar-counter anim" style="animation-delay:0.12s;margin-bottom:8px">
+      <span>💰 <span id="paidTicker">$50,002,588</span>+ paid to users</span>
+    </div>
+
+    <p class="subtext anim" style="animation-delay:0.17s;margin-bottom:24px;padding:0">Add Gravy Pass to your wallet to activate your <strong style="color:hsl(160,100%,50%)">$1 bonus</strong> and start earning today.</p>
+    <button class="btn-activate anim" id="activateBtn" style="animation-delay:0.22s;max-width:100%" onclick="handleActivate()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="6" width="20" height="14" rx="3" stroke="hsl(160,20%,5%)" stroke-width="2"/><path d="M2 10h20" stroke="hsl(160,20%,5%)" stroke-width="2"/><path d="M16 15h2" stroke="hsl(160,20%,5%)" stroke-width="2" stroke-linecap="round"/><path d="M6 3l12 0" stroke="hsl(160,20%,5%)" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>ACTIVATE WALLET — CLAIM $1 BONUS</span>
+    </button>
+    <div class="card-dark anim" style="animation-delay:0.22s;margin-top:24px">
+      <h3 style="text-align:center;font-size:11px;font-weight:700;letter-spacing:0.15em;color:hsla(0,0%,100%,0.4);margin:0;padding:20px 0;text-transform:uppercase">YOUR EARNING JOURNEY</h3>
+      <div class="step"><div class="step-num">1</div><div><h4>Add Gravy Pass to Your Wallet</h4><p>Available on Apple Wallet (iOS) &amp; Google Wallet (Android)<br>One tap to get started • No app download required</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><h4>Complete Starter Offers</h4><p>Play games, try apps, or complete simple challenges. Unlock access to popular gaming rewards. (Roblox, Block Blast, 8 Ball Pool)</p></div></div>
+      <div class="step"><div class="step-num">3</div><div><h4>Get Paid Instantly</h4><p>Cash out your earnings instantly to Apple Wallet or Google Wallet — no waiting, no limits.</p></div></div>
+    </div>
+
+    <!-- Important card -->
+    <div class="card-important anim" style="animation-delay:0.3s;margin:20px 0">
+      <div class="badge">
+        <span class="badge-icon">🔓</span>
+        <span class="badge-title">IMPORTANT</span>
+      </div>
+      <div class="inner">
+        <p>New users: complete <strong>2 quick offers</strong> to unlock access to Roblox, Block Blast, high-paying gaming rewards, and TikTok paid-to-scroll tasks.</p>
+        <p>Your first gaming offer (<em>~3–5 minutes</em>) activates your account and unlocks exclusive high-paying tasks. <strong>New high-paying offers ($75+/hr) coming soon.</strong> — complete your starter offer now.</p>
+      </div>
+    </div>
+
+    <!-- People earning counter — standalone -->
+    <div class="live-bar anim" style="animation-delay:0.45s;width:100%;border-radius:14px;justify-content:center">
+      <span class="live-dot"></span>
+      <span><b id="liveUsers">12,856</b> people earning right now</span>
+    </div>
+    <p class="footer anim" style="animation-delay:0.5s">Trusted by over 500,000 users earning money daily</p>
+  </div>
+</div>
+
+<script>
+/* ── Timer (15 min countdown) ── */
+(function(){
+  var end = Date.now() + 15 * 60 * 1000;
+  function tick(){
+    var rem = Math.max(0, end - Date.now());
+    var m = Math.floor(rem / 60000);
+    var s = Math.floor((rem % 60000) / 1000);
+    var el = document.getElementById('timerDisplay');
+    if(el) el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    if(rem > 0) setTimeout(tick, 500);
+  }
+  tick();
+})();
+
+/* ── Load game icons from iTunes API ── */
+(function(){
+  // App Store IDs
+  var games = [
+    {id:'543186831',  el:'icon-8ball'},
+    {id:'1464013682', el:'icon-blockblast'},
+    {id:'406889139',  el:'icon-coinmaster'},
+    {id:'1621328561', el:'icon-monopoly'},
+    {id:'1478762876', el:'icon-dicedreams'}
+  ];
+  games.forEach(function(g){
+    fetch('https://itunes.apple.com/lookup?id=' + g.id + '&country=us')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d.results && d.results[0]){
+          var img = document.getElementById(g.el);
+          if(img) img.src = d.results[0].artworkUrl100 || d.results[0].artworkUrl60;
+        }
+      })
+      .catch(function(){});
+  });
+})();
+(function(){
+  var liveEl = document.getElementById('liveUsers');
+  var liveElA = document.getElementById('liveUsersA');
+  var liveCount = 12856;
+  function update(){
+    liveCount += Math.floor(Math.random() * 7) - 3;
+    if(liveCount < 12500) liveCount = 12500 + Math.floor(Math.random() * 100);
+    if(liveCount > 13200) liveCount = 13200 - Math.floor(Math.random() * 100);
+    var formatted = liveCount.toLocaleString();
+    if(liveEl) liveEl.textContent = formatted;
+    if(liveElA) liveElA.textContent = formatted;
+  }
+  setInterval(update, 4000);
+})();
+
+/* ── Dollar counter (reference site logic) ── */
+(function(){
+  var dollarBase = 50002588;
+  var dollarEl = document.getElementById('paidTicker');
+  if(dollarEl){
+    setInterval(function(){
+      dollarBase += Math.floor(Math.random() * 200) + 50;
+      dollarEl.textContent = '$' + dollarBase.toLocaleString();
+    }, 3000);
+  }
+})();
+
+/* ── Screen transitions ── */
+function showScreenB(){
+  var a = document.getElementById('screenA');
+  var b = document.getElementById('screenB');
+
+  // Fade screen A out
+  a.classList.remove('visible');
+  a.classList.add('hidden');
+
+  // Show screen B immediately in DOM so no layout collapse, but invisible
+  b.style.display = '';
+  b.style.opacity = '0';
+  b.style.transform = 'translateY(16px)';
+  b.style.transition = 'none';
+  b.classList.remove('hidden');
+
+  // Reset all .anim children so they replay
+  b.querySelectorAll('.anim').forEach(function(el) {
+    el.style.animation = 'none';
+    el.offsetHeight; // force reflow
+    el.style.animation = '';
+  });
+
+  // After screen A fades (matches 0.45s transition), slide screen B in
+  setTimeout(function() {
+    b.style.transition = 'opacity 0.45s cubic-bezier(0.16,1,0.3,1), transform 0.45s cubic-bezier(0.16,1,0.3,1)';
+    b.style.opacity = '1';
+    b.style.transform = 'translateY(0)';
+    b.classList.add('visible');
+    window.scrollTo({top:0, behavior:'instant'});
+
+    // Start glow-pulse on button after its fade-in finishes (0.22s delay + 0.5s duration)
+    setTimeout(function() {
+      var btn = document.getElementById('activateBtn');
+      if (btn) {
+        btn.style.opacity = '1';
+        btn.style.animation = 'glow-pulse 2.4s ease-in-out infinite';
       }
     }, 750);
   }, 420);
