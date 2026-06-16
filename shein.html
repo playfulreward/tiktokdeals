@@ -1,0 +1,689 @@
+
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#f5d8b0">
+    <script type="text/javascript" async="" src="js/events.js"></script><script src="js/trx.js"></script>
+
+    <link rel="icon" type="image/svg+xml" href="https://static.wikia.nocookie.net/logopedia/images/b/b5/Shein_2017_%28App_Icon%29.jpg/revision/latest/scale-to-width-down/250?cb=20220801031315">
+    <link rel="apple-touch-icon" href="https://static.wikia.nocookie.net/logopedia/images/b/b5/Shein_2017_%28App_Icon%29.jpg/revision/latest/scale-to-width-down/250?cb=20220801031315">
+    <title>Claim Your $750 Shein Bonus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5d8b0;
+            --surface: #fef6e3;
+            --surface2: #fbe6c8;
+            --text: #2f3033;
+            --muted: #6b6770;
+            --red: #f45646;
+            --red-bright: #f87060;
+            --red-deep: #d33a2a;
+            --gold: #d97706;
+            --gold-bright: #ea7b0a;
+            --red-glow: rgba(244,86,70,0.10);
+            --red-glow-strong: rgba(244,86,70,0.22);
+            --gold-glow: rgba(217,119,6,0.10);
+            --border: rgba(47,48,51,0.10);
+            --border-red: rgba(244,86,70,0.22);
+            --shadow-sm: 0 2px 8px rgba(244,86,70,0.08);
+            --shadow-md: 0 8px 24px rgba(244,86,70,0.12);
+            --shadow-lg: 0 12px 40px rgba(244,86,70,0.18);
+            --radius: 20px;
+            --radius-sm: 14px;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+        html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        /* ===== AMBIENT (soft pink wash) ===== */
+        .ambient { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+        .ambient::before {
+            content: ''; position: absolute; width: 720px; height: 720px; top: -260px; left: -200px;
+            background: radial-gradient(circle, rgba(244,86,70,0.08) 0%, transparent 70%);
+            animation: drift1 22s ease-in-out infinite;
+        }
+        .ambient::after {
+            content: ''; position: absolute; width: 600px; height: 600px; bottom: -200px; right: -150px;
+            background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+            animation: drift2 26s ease-in-out infinite;
+        }
+        @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,80px)} }
+        @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,-60px)} }
+
+        /* ===== UTILITY ===== */
+        .slide-up { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        @keyframes fadeIn { from{opacity:0;transform:scale(0.97)} to{opacity:1;transform:scale(1)} }
+        @keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes shimmer { 0%{left:-100%} 100%{left:200%} }
+
+        /* ===== AGE GATE ===== */
+        #age-quiz {
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; padding: 40px 20px; position: relative; z-index: 1;
+        }
+        .quiz-wrap { max-width: 420px; width: 100%; text-align: center; }
+
+        .quiz-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--surface); border: 1px solid var(--border-red);
+            border-radius: 100px; padding: 8px 18px 8px 10px; margin-bottom: 28px;
+            animation: slideUp 0.4s ease-out both;
+        }
+        .quiz-badge img { width: 28px; height: 28px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+        .quiz-badge span { font-size: 13px; font-weight: 600; color: var(--red-bright); letter-spacing: 0.3px; }
+
+        .quiz-heading {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(38px, 10vw, 56px); font-weight: 800; line-height: 1.05;
+            margin-bottom: 16px; animation: slideUp 0.5s ease-out 0.1s both;
+        }
+        .quiz-heading .accent {
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .quiz-sub {
+            font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 36px;
+            animation: slideUp 0.5s ease-out 0.15s both; max-width: 340px; margin-left: auto; margin-right: auto;
+        }
+        .live-counter {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: #fff0e0;
+            border: 1px solid rgba(244,86,70,0.18);
+            border-radius: 14px; padding: 14px 22px; margin-bottom: 32px;
+            box-shadow: var(--shadow-sm);
+            animation: slideUp 0.5s ease-out 0.2s both, livePulse 2.4s ease-in-out infinite;
+        }
+        @keyframes livePulse {
+            0%,100% { box-shadow: 0 0 0 0 rgba(244,86,70,0.18); }
+            50% { box-shadow: 0 0 0 6px rgba(244,86,70,0.0); }
+        }
+        .live-dot {
+            width: 10px; height: 10px; background: var(--red); border-radius: 50%;
+            box-shadow: 0 0 12px var(--red), 0 0 20px rgba(244,86,70,0.5);
+            animation: blink 1.5s ease-in-out infinite; flex-shrink: 0;
+        }
+        @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.85)} }
+        .live-counter span { font-size: 15px; color: var(--text); font-weight: 600; letter-spacing: 0.1px; }
+        .live-counter span .live-num {
+            font-size: 18px; font-weight: 800; color: var(--red-deep);
+            font-variant-numeric: tabular-nums; margin-right: 4px;
+        }
+
+        .age-options { display: flex; flex-direction: column; gap: 12px; animation: slideUp 0.5s ease-out 0.25s both; }
+        .age-btn {
+            display: block; text-decoration: none; border: none; border-radius: var(--radius);
+            padding: 22px 24px; cursor: pointer; position: relative; overflow: hidden;
+            transition: all 0.25s ease; text-align: center;
+        }
+        .age-btn.primary {
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+            box-shadow: 0 10px 28px rgba(244,86,70,0.30), inset 0 1px 0 rgba(255,255,255,0.18);
+        }
+        .age-btn.primary .age-label { color: #fff; }
+        .age-btn.primary .age-desc { color: rgba(255,255,255,0.85); }
+        .age-btn.primary:active { transform: scale(0.97); }
+        .age-btn.secondary { background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+        .age-btn.secondary:active { transform: scale(0.97); border-color: var(--border-red); }
+        .age-label { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+        .age-desc { font-size: 12px; color: var(--muted); font-weight: 500; }
+        .age-btn.primary::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .scroll-content { display: none; opacity: 0; }
+        .scroll-content.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
+
+        .main-wrap {
+            max-width: 440px; margin: 0 auto; padding: 100px 20px 120px;
+            position: relative; z-index: 1;
+        }
+
+        .logo-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 24px; }
+        .logo-pill {
+            width: 64px; height: 64px; border-radius: 18px; overflow: hidden;
+            border: 1px solid var(--border); box-shadow: var(--shadow-md);
+            background: var(--surface);
+        }
+        .logo-pill img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* Countdown timer */
+        .countdown-bar {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: #fff1f1; border: 1px solid rgba(239,68,68,0.18);
+            border-radius: 10px; padding: 10px 16px; margin-bottom: 20px;
+        }
+        .countdown-bar svg { width: 14px; height: 14px; color: #dc2626; flex-shrink: 0; }
+        .countdown-bar span { font-size: 13px; color: #b91c1c; font-weight: 600; }
+        .countdown-bar .timer { font-variant-numeric: tabular-nums; color: #dc2626; font-weight: 700; }
+
+        .main-heading {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(32px, 8vw, 44px); font-weight: 800; line-height: 1.1;
+            margin-bottom: 8px; text-align: center;
+        }
+        .main-heading .g {
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        /* Dollar counter */
+        .dollar-counter {
+            text-align: center; margin-bottom: 8px;
+        }
+        .dollar-counter span {
+            font-size: 13px; font-weight: 600; color: var(--red-deep);
+            font-variant-numeric: tabular-nums; letter-spacing: 0.3px;
+        }
+
+        .main-sub {
+            font-size: 15px; color: var(--muted); line-height: 1.6; text-align: center;
+            margin-bottom: 32px; max-width: 360px; margin-left: auto; margin-right: auto;
+        }
+
+        /* CTA button */
+        .cta {
+            display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+            color: #fff !important; font-weight: 800; font-size: 16px; letter-spacing: 0.3px;
+            border: 0; border-radius: var(--radius); padding: 20px; text-decoration: none;
+            cursor: pointer; position: relative; overflow: hidden;
+            box-shadow: 0 10px 28px rgba(244,86,70,0.28), inset 0 1px 0 rgba(255,255,255,0.18);
+            transition: all 0.3s ease; animation: ctaPulse 3s ease-in-out infinite;
+        }
+        .cta:active { transform: scale(0.97); }
+        .cta-icon { width: 22px; height: 22px; flex-shrink: 0; }
+        .cta::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        @keyframes ctaPulse {
+            0%,100% { box-shadow: 0 10px 28px rgba(244,86,70,0.28); }
+            50% { box-shadow: 0 14px 40px rgba(244,86,70,0.42); }
+        }
+
+        .payout-row {
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            margin-top: 14px; margin-bottom: 36px;
+        }
+        .payout-icon {
+            width: 28px; height: 28px; border-radius: 50%; background: var(--surface2);
+            border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+        }
+        .payout-label { font-size: 12px; color: var(--muted); margin-left: 4px; font-weight: 500; }
+
+        /* ===== NOTIFICATION TOASTS ===== */
+        .notif-zone {
+            position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+            z-index: 100; width: calc(100% - 32px); max-width: 400px;
+            pointer-events: none; height: 70px;
+        }
+        .notif-toast {
+            position: absolute; top: 0; left: 0; right: 0;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+            padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+            box-shadow: var(--shadow-lg);
+            animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+            pointer-events: auto; opacity: 0; transform: translateY(-20px);
+        }
+        @keyframes toastIn { from{opacity:0;transform:translateY(-20px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+        @keyframes toastOut { from{opacity:1;transform:translateY(0) scale(1)} to{opacity:0;transform:translateY(-10px) scale(0.96)} }
+        .notif-toast.leaving { animation: toastOut 0.3s ease-in forwards; }
+        .notif-icon {
+            width: 38px; height: 38px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;
+            border: 1px solid var(--border); background: var(--surface);
+        }
+        .notif-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .notif-body { flex: 1; min-width: 0; }
+        .notif-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .notif-desc { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .notif-time { font-size: 10px; color: var(--muted); opacity: 0.6; flex-shrink: 0; margin-left: 2px; }
+
+        /* Steps card */
+        .steps-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+        .steps-title { padding: 18px 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); border-bottom: 1px solid var(--border); }
+        .step-item { display: flex; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--border); align-items: flex-start; }
+        .step-item:last-child { border-bottom: none; }
+        .step-num { width: 28px; height: 28px; border-radius: 9px; background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; box-shadow: 0 4px 10px rgba(244,86,70,0.25); }
+        .step-text b { display: block; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+        .step-text span { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+        /* Urgency banner */
+        .urgency {
+            background: #fffaf0;
+            border: 1px solid rgba(245,158,11,0.22); border-radius: var(--radius-sm);
+            padding: 16px 18px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px;
+        }
+        .urgency-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+        .urgency-text { font-size: 13px; color: #92400e; line-height: 1.5; font-weight: 500; }
+        .urgency-text strong { color: #b45309; font-weight: 700; }
+
+        .urgency-tip {
+            margin-top: 8px; padding-top: 8px;
+            border-top: 1px solid rgba(180,83,9,0.15);
+            font-size: 11.5px; color: #a16207; line-height: 1.5; font-weight: 500;
+        }
+        .urgency-tip strong { color: #92400e; font-weight: 700; }
+
+        /* Trust bar */
+        .trust-bar { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 16px 0; margin-top: 4px; }
+        .trust-item { display: flex; align-items: center; gap: 6px; }
+        .trust-item svg { width: 14px; height: 14px; color: var(--red-deep); opacity: 0.85; }
+        .trust-item span { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+        .foot { text-align: center; font-size: 11px; color: var(--muted); opacity: 0.7; margin-top: 8px; padding-bottom: 20px; }
+
+        /* ===== STICKY BOTTOM CTA ===== */
+        .sticky-cta {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+            background: linear-gradient(to top, var(--bg) 60%, transparent);
+            padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+            display: none; justify-content: center;
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .sticky-cta.visible { display: flex; opacity: 1; transform: translateY(0); }
+        .sticky-cta .cta-sm {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; max-width: 440px;
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+            color: #fff; font-weight: 800; font-size: 15px; border: 0; border-radius: 16px;
+            padding: 16px 20px; text-decoration: none; cursor: pointer; position: relative; overflow: hidden;
+            box-shadow: 0 -2px 18px rgba(244,86,70,0.22), 0 10px 24px rgba(244,86,70,0.20), inset 0 1px 0 rgba(255,255,255,0.18);
+        }
+        .sticky-cta .cta-sm:active { transform: scale(0.97); }
+        .sticky-cta .cta-sm::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        .sticky-cta .cta-sm svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            #age-quiz { padding: 32px 16px; }
+            .quiz-heading { font-size: clamp(34px, 9vw, 48px); }
+            .main-wrap { padding: 90px 16px 120px; }
+            .logo-pill { width: 48px; height: 48px; border-radius: 14px; }
+            .main-heading { font-size: clamp(28px, 7.5vw, 38px); }
+            .cta { padding: 18px; font-size: 15px; border-radius: 16px; }
+            .step-item { padding: 16px; }
+        }
+        @media (max-width: 375px) {
+            .quiz-heading { font-size: 32px; }
+            .main-heading { font-size: 26px; }
+            .logo-pill { width: 44px; height: 44px; border-radius: 12px; }
+            .cta { padding: 16px; font-size: 14px; }
+            .step-item { padding: 14px; gap: 10px; }
+            .step-num { width: 24px; height: 24px; font-size: 12px; border-radius: 7px; }
+            .step-text b { font-size: 14px; }
+            .step-text span { font-size: 12px; }
+            .urgency { padding: 14px; }
+            .urgency-text { font-size: 12px; }
+            .trust-bar { gap: 14px; }
+            .trust-item span { font-size: 10px; }
+            .notif-toast { padding: 12px 14px; border-radius: 14px; gap: 10px; }
+            .notif-icon { width: 32px; height: 32px; border-radius: 8px; }
+            .notif-icon img { width: 24px; height: 24px; border-radius: 5px; padding: 1px; }
+            .notif-title { font-size: 12px; }
+            .notif-desc { font-size: 11px; }
+            .sticky-cta .cta-sm { padding: 14px 16px; font-size: 14px; }
+        }
+        @media (max-height: 500px) and (orientation: landscape) {
+            #age-quiz { min-height: auto; padding: 20px 24px; }
+            .main-wrap { padding: 20px 24px 100px; }
+        }
+        @media (hover: none) and (pointer: coarse) {
+            .age-btn:hover { transform: none; }
+            .cta:hover { transform: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient"></div>
+
+    <!-- ===== AGE GATE ===== -->
+    <div id="age-quiz">
+        <div class="quiz-wrap">
+            <div class="quiz-badge slide-up">
+                <img src="https://static.wikia.nocookie.net/logopedia/images/b/b5/Shein_2017_%28App_Icon%29.jpg/revision/latest/scale-to-width-down/250?cb=20220801031315" alt="Shein">
+                <span>Shein Rewards</span>
+            </div>
+            <h1 class="quiz-heading slide-up">Claim Your<br><span class="accent">$750 Bonus</span></h1>
+            <p class="quiz-sub">Shein is giving away $750 in free credit to select shoppers today &#8212; and your spot is still open. Don't let someone else claim it.</p>
+            <div class="live-counter">
+                <div class="live-dot"></div>
+                <span><span class="live-num" id="liveCount">12,863</span>shoppers claiming now</span>
+            </div>
+            <div class="age-options">
+                <a class="age-btn primary" id="opt21" href="#">
+                    <div class="age-label">I'm 18 or older</div>
+                    <div class="age-desc">Eligible for the full $750 bonus</div>
+                </a>
+                <a class="age-btn secondary" id="opt18" href="#">
+                    <div class="age-label">I'm under 18</div>
+                    <div class="age-desc">Eligible for $250 voucher</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NOTIFICATION TOAST ZONE ===== -->
+    <div class="notif-zone" id="notifZone"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div id="fc-content" class="scroll-content">
+        <div class="main-wrap">
+            <div class="logo-row">
+                <div class="logo-pill"><img src="https://static.wikia.nocookie.net/logopedia/images/b/b5/Shein_2017_%28App_Icon%29.jpg/revision/latest/scale-to-width-down/250?cb=20220801031315" alt="Shein"></div>
+            </div>
+
+            <!-- Countdown timer -->
+            <div class="countdown-bar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Offer expires in <span class="timer" id="countdown">14:59</span></span>
+            </div>
+
+            <h2 class="main-heading">Your $750<br><span class="g">Bonus</span> Is Reserved</h2>
+
+            <!-- Animated dollar counter -->
+            <div class="dollar-counter">
+                <span>&#x1F381; <span id="dollarCount">$847,500</span>+ in bonuses claimed today</span>
+            </div>
+
+            <p class="main-sub">Your spot is held. Start below &#8212; enter your email, answer a few quick questions, and your $750 Shein credit unlocks instantly.</p>
+
+            <a class="cta trxbutton" href="#">
+                <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                Claim My $750 Now &#8212; It's Free
+            </a>
+
+            <div class="payout-row">
+                <div class="payout-icon">&#x1F45C;</div>
+                <div class="payout-icon">&#x1F457;</div>
+                <div class="payout-icon">&#x1F45F;</div>
+                <div class="payout-icon">&#x1F484;</div>
+                <span class="payout-label">Free shipping included</span>
+            </div>
+
+            <div class="steps-card">
+                <div class="steps-title">3 steps &#8212; most finish in 4 minutes</div>
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-text"><b>Enter Your Email</b><span>Takes 30 seconds &#8212; no credit card, no catch</span></div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-text"><b>Answer a Few Quick Questions</b><span>Just your style &amp; shopping preferences &#8212; helps us personalize your $750 haul</span></div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-text"><b>Complete 1 Sponsor Deal to Unlock Your Cash</b><span>Pick any deal from our partners &#8212; takes 2 minutes, then your balance is yours to cash out</span></div>
+                </div>
+            </div>
+
+            <div class="urgency">
+                <div class="urgency-icon">&#x1F525;</div>
+                <div class="urgency-text">
+                    <strong>Almost there &#8212; don't stop at Step 2.</strong> Your balance only unlocks after you complete your sponsor deal. Most people who quit early miss out entirely.
+                    <div class="urgency-tip">&#x1F4A1; <strong>Pro tip:</strong> If your deal involves a purchase, you get <strong>10x that amount in credit</strong> &#8212; spend $10, cash out $100.</div>
+                </div>
+            </div>
+
+            <div class="trust-bar">
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>100% Free</span>
+                </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <span>500K+ claimed</span>
+                </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>4.8 rated</span>
+                </div>
+            </div>
+            <div class="foot">Finish all 3 steps to receive your full $750 Shein bonus</div>
+        </div>
+    </div>
+
+    <!-- ===== STICKY BOTTOM CTA ===== -->
+    <div class="sticky-cta" id="stickyCta">
+        <a class="cta-sm trxbutton" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            Claim My $750 Now &#8212; It's Free
+        </a>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ===== LIVE COUNTER =====
+        var baseCount = 12863;
+        setInterval(function() {
+            baseCount += Math.floor(Math.random() * 5) - 1;
+            if (baseCount < 12500) baseCount = 12500;
+            document.getElementById('liveCount').textContent = baseCount.toLocaleString();
+        }, 4000);
+
+        // ===== COUNTDOWN TIMER =====
+        var countdownSeconds = 14 * 60 + 59; // 14:59
+        var countdownEl = document.getElementById('countdown');
+        function updateCountdown() {
+            if (countdownSeconds <= 0) return;
+            countdownSeconds--;
+            var m = Math.floor(countdownSeconds / 60);
+            var s = countdownSeconds % 60;
+            countdownEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+        }
+        var countdownInterval = null;
+
+        // ===== DOLLAR COUNTER =====
+        var dollarBase = 847500;
+        var dollarEl = document.getElementById('dollarCount');
+        function updateDollar() {
+            dollarBase += Math.floor(Math.random() * 80) + 10;
+            dollarEl.textContent = '$' + dollarBase.toLocaleString();
+        }
+        var dollarInterval = null;
+
+        // ===== NOTIFICATION TOASTS =====
+        var notifData = [
+            {n:'Olivia M.',a:'$5',t:'cashed out after completing 1 deal'},
+            {n:'Mia R.',a:'$100',t:'cashed out after completing 2 deals'},
+            {n:'Sophie T.',a:'$5',t:'cashed out after completing 1 deal'},
+            {n:'Emma L.',a:'$250',t:'cashed out after completing 3 deals'},
+            {n:'Ava P.',a:'$100',t:'cashed out after completing 2 deals'},
+            {n:'Charlotte K.',a:'$500',t:'cashed out after completing 4 deals'},
+            {n:'Amelia W.',a:'$5',t:'cashed out after completing 1 deal'},
+            {n:'Isabella B.',a:'$750',t:'cashed out after completing 5 deals'},
+            {n:'Mila S.',a:'$100',t:'cashed out after completing 2 deals'},
+            {n:'Harper D.',a:'$250',t:'cashed out after completing 3 deals'},
+            {n:'Evelyn H.',a:'$5',t:'cashed out after completing 1 deal'},
+            {n:'Ella F.',a:'$1,000',t:'cashed out after completing 6 deals'},
+            {n:'Grace T.',a:'$100',t:'cashed out after completing 2 deals'},
+            {n:'Lily N.',a:'$500',t:'cashed out after completing 4 deals'},
+            {n:'Zoe C.',a:'$5',t:'cashed out after completing 1 deal'}
+        ];
+        var notifZone = document.getElementById('notifZone');
+        var notifIdx = 0;
+        var notifActive = false;
+        var times = ['just now','2s ago','5s ago','just now','1s ago','3s ago','just now','4s ago','2s ago','just now','1s ago','3s ago','just now','2s ago','6s ago'];
+
+        function showNotif() {
+            if (!notifActive) return;
+            var item = notifData[notifIdx % notifData.length];
+            var time = times[notifIdx % times.length];
+            notifIdx++;
+            var toast = document.createElement('div');
+            toast.className = 'notif-toast';
+            toast.innerHTML =
+                '<div class="notif-icon"><img src="https://static.wikia.nocookie.net/logopedia/images/b/b5/Shein_2017_%28App_Icon%29.jpg/revision/latest/scale-to-width-down/250?cb=20220801031315" alt="Shein"></div>' +
+                '<div class="notif-body"><div class="notif-title">' + item.n + ' cashed out <span style="color:var(--red-deep);font-weight:800">' + item.a + '</span></div><div class="notif-desc">' + item.t + '</div></div>' +
+                '<div class="notif-time">' + time + '</div>';
+            var old = notifZone.querySelector('.notif-toast');
+            if (old) {
+                old.classList.add('leaving');
+                setTimeout(function() {
+                    if (old.parentNode) old.parentNode.removeChild(old);
+                    notifZone.appendChild(toast);
+                }, 300);
+            } else {
+                notifZone.appendChild(toast);
+            }
+            setTimeout(function() {
+                toast.classList.add('leaving');
+                setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+            }, 3500);
+        }
+        function startNotifs() {
+            if (notifActive) return;
+            notifActive = true;
+            setTimeout(showNotif, 1500);
+            (function scheduleNext() {
+                var delay = 4000 + Math.random() * 2000;
+                setTimeout(function() { if (notifActive) { showNotif(); scheduleNext(); } }, delay);
+            })();
+        }
+
+        // ===== STICKY CTA =====
+        var stickyCta = document.getElementById('stickyCta');
+        var mainCta = null;
+        function handleStickyScroll() {
+            if (!mainCta) return;
+            var rect = mainCta.getBoundingClientRect();
+            if (rect.bottom < 0) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+        }
+
+        // ===== CORE FUNCTIONS =====
+        function appendSearchParamsToOfferLinks() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var forwarded = ['s1','s2','s3','s4','s5'];
+            var pairs = [];
+            forwarded.forEach(function(key) {
+                if (urlParams.has(key)) {
+                    pairs.push(key + '=' + encodeURIComponent(urlParams.get(key)));
+                }
+            });
+            if (pairs.length === 0) return;
+            var extra = pairs.join('&');
+            document.querySelectorAll('.trxbutton').forEach(function(button) {
+                var href = button.getAttribute('href');
+                if (href && href !== '#') {
+                    // If the base URL already ends with &s1= or ?s1= (blank), replace it
+                    href = href.replace(/[&?]s1=$/, '');
+                    var separator = href.indexOf('?') !== -1 ? '&' : '?';
+                    button.setAttribute('href', href + separator + extra);
+                }
+            });
+        }
+
+        function fireTikTokEvents() {
+            try {
+                ttq.track('AddToCart',   { content_type:'product', content_id:'shyn-750',  value:0.50, currency:'USD' });
+                ttq.track('Purchase',    { content_type:'product', content_id:'shyn-750',  value:0.50, currency:'USD' });
+                ttq.track('SubmitForm',  { content_type:'lead',    content_id:'shyn-lead', value:0.50, currency:'USD' });
+            } catch(e) {}
+        }
+
+        // Age gate → main content (split: 18+ → click/2, under-18 → click/1, matching freecashnew convention)
+        document.getElementById('opt21').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('age-quiz').style.display = 'none';
+            showContent('https://spnccrzone.com/?f5c=jxaF8V47KV%2fOy23laEuKMt7KcXmOM%2fkDvQJDRoz7h5U%3d&s1=');
+        });
+        document.getElementById('opt18').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('age-quiz').style.display = 'none';
+            showContent('https://spnccrzone.com/?f5c=jxaF8V47KV%2fOy23laEuKMt7KcXmOM%2fkDvQJDRoz7h5U%3d&s1=');
+        });
+
+        function showContent(ctaUrl) {
+            // Set CTA URLs on all trxbuttons
+            document.querySelectorAll('.trxbutton').forEach(function(btn) {
+                btn.setAttribute('href', ctaUrl);
+            });
+            document.getElementById('fc-content').classList.add('active');
+            appendSearchParamsToOfferLinks();
+            window.scrollTo(0, 0);
+
+            // Start features
+            startNotifs();
+            countdownInterval = setInterval(updateCountdown, 1000);
+            dollarInterval = setInterval(updateDollar, 3000);
+
+            // Sticky CTA scroll listener
+            mainCta = document.querySelector('#fc-content .cta.trxbutton');
+            window.addEventListener('scroll', handleStickyScroll, { passive: true });
+        }
+
+        // Device detection for TikTok in-app browser bypass
+        function isAndroid() {
+            return /android/i.test(navigator.userAgent);
+        }
+
+        function rewriteForExternalBrowser(url) {
+            if (isAndroid()) {
+                // Android Intent URL forces OS to open in default browser
+                return 'intent://' + url.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+            } else {
+                // iOS x-safari scheme hands URL directly to Safari, skips TikTok dialog
+                return url.replace(/^https:\/\//, 'x-safari-https://');
+            }
+        }
+
+        // CTA click handler (both main and sticky)
+        var clicked = false;
+        document.querySelectorAll('.trxbutton').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (clicked) return;
+                var href = this.getAttribute('href');
+                if (!href || href === '#') return;
+                clicked = true;
+                fireTikTokEvents();
+                var finalUrl = rewriteForExternalBrowser(href);
+                setTimeout(function() { window.location.href = finalUrl; }, 200);
+            });
+        });
+    });
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"89315c40988c439384fd28f918bef4e5","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
