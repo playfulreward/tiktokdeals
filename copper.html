@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,7 +99,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 .step h4{font-size:15px;font-weight:700;margin-bottom:4px;color:#fff}
 .step p{font-size:13px;color:#9AA0AE;line-height:1.4}
 
-/* Important card — matches reference activation-notice */
+/* Important card */
 .card-important{
   background:linear-gradient(135deg,#1a0f0a 0%,#0f1419 100%);
   border:2px solid #ff4757;
@@ -124,7 +125,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 .card-important p{font-size:14px;color:#9AA0AE;line-height:1.5;margin:0}
 .card-important p strong{color:#fff;font-weight:700}
 .card-important p em{color:rgba(255,255,255,0.9);font-style:normal;font-weight:700}
-
 
 /* Live bar */
 .live-bar{
@@ -207,7 +207,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
 <div class="bg-glow"></div>
 <div class="notif-stack" id="notifStack"></div>
 
-
 <div class="container">
   <!-- Screen A -->
   <div id="screenA" class="screen visible">
@@ -257,7 +256,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helv
     <p class="subtext anim" style="animation-delay:0.17s;margin-bottom:24px;padding:0">Your account is pre-qualified for higher payouts. Download the app to activate your <strong style="color:#fff">$10 bonus</strong> and full access.</p>
 
     <button class="btn-activate anim" id="activateBtn" style="animation-delay:0.22s;max-width:100%" onclick="handleActivate()">
-      <!-- Apple logo icon -->
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.37 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#fff"/>
       </svg>
@@ -431,17 +429,24 @@ function showScreenB(){
 function isAndroid(){
   return /android/i.test(navigator.userAgent);
 }
+
 function handleActivate(){
   var params = new URLSearchParams(window.location.search);
   var allowed = ['s1','s2','s3','s4','s5'];
-  var filtered = new URLSearchParams();
+
+  // Build destination URL starting with base affiliate params
+  var dest = new URLSearchParams();
+  dest.set('a', '26157');
+  dest.set('c', '55412');
+
+  // Forward allowed sub-parameters from the page URL
   allowed.forEach(function(k){
     var v = params.get(k);
-    if(v !== null) filtered.set(k, v);
+    if(v !== null) dest.set(k, v);
   });
-  var qs = filtered.toString();
-  var base = 'https://www.phef6trk.com/QZ85XF/324QNSF/';
-  var url = qs ? base + '?' + qs : base;
+
+  var url = 'https://montrk.co.uk/?' + dest.toString();
+
   if(isAndroid()){
     var encoded = encodeURIComponent(url);
     var intentUrl = 'intent://' + url.replace(/^https?:\/\//, '') + '#Intent;scheme=https;action=android.intent.action.VIEW;package=com.android.chrome;S.browser_fallback_url=' + encoded + ';end';
