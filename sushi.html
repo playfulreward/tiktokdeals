@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etc Pass</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:hsl(17,20%,5%);color:#fff;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;overflow-x:hidden}
+.bg-glow{position:fixed;inset:0;background:radial-gradient(ellipse at center,rgba(255,203,182,.12) 0%,transparent 60%),radial-gradient(ellipse at center,rgba(255,203,182,.06) 0%,transparent 80%),hsl(17,20%,5%);z-index:0}
+.container{position:relative;z-index:1;width:100%;max-width:540px;padding:88px 24px 48px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.logo-row{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.logo-row img{width:56px;height:56px;border-radius:12px;box-shadow:0 0 20px rgba(255,203,182,.15)}
+.logo-row span{color:hsla(0,0%,100%,.5);font-size:20px;font-weight:500}
+.headline{font-size:clamp(2rem,6vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;background:linear-gradient(180deg,#ffffff 0%,#ffcbb6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;margin-bottom:16px;filter:drop-shadow(0 0 40px rgba(255,203,182,.15))}
+.subtext{color:hsla(0,0%,100%,.5);font-size:15px;line-height:1.6;max-width:400px;margin-bottom:20px}
+.subtext .accent{color:#ffcbb6;font-weight:600}
+.trust-section{width:100%;max-width:420px;margin-bottom:20px}
+.stats-row{display:flex;gap:8px}
+.stat-box{flex:1;background:hsl(17,10%,10%);border:1px solid hsl(17,15%,18%);border-radius:12px;padding:12px 6px;text-align:center}
+.stat-val{font-size:clamp(1rem,4vw,1.2rem);font-weight:800;line-height:1;color:#fff;margin-bottom:4px}
+.stat-val .star{color:#ffcbb6}
+.stat-lbl{font-size:9px;color:hsla(0,0%,100%,.45);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.trust-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;width:100%;max-width:320px;margin-left:auto;margin-right:auto;background:none;border:none;padding:0}
+.trust-label{font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
+.trust-stars{display:flex;align-items:center;gap:3px}
+.trust-star{width:18px;height:18px;border-radius:2px;background:#ffcbb6;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;color:#150f0c;font-weight:700}
+.trust-name{font-size:11px;font-weight:700;color:#ffcbb6;letter-spacing:-.01em;white-space:nowrap}
+.social-proof{width:100%;max-width:420px;margin-top:28px;text-align:left}
+.social-cta{margin-top:18px;margin-bottom:0}
+.social-section{margin-bottom:22px}
+.social-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.social-label{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:hsla(0,0%,100%,.4)}
+.social-disclaimer{font-size:10px;color:hsla(0,0%,100%,.3);white-space:nowrap}
+.review-card{background:hsl(17,10%,10%);border:1px solid hsl(17,15%,18%);border-radius:14px;padding:14px;margin-bottom:10px}
+.review-card:last-child{margin-bottom:0}
+.review-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,rgba(255,203,182,.35) 0%,rgba(255,203,182,.15) 100%);border:1px solid rgba(255,203,182,.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.review-meta{flex:1;min-width:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.review-name{font-size:14px;font-weight:800;color:#fff}
+.tier-badge{display:inline-flex;padding:3px 8px;border-radius:999px;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,203,182,.15);border:1px solid rgba(255,203,182,.35);color:#ffcbb6}
+.tier-badge.pro{background:#ffcbb6;color:#150f0c;border-color:#ffcbb6}
+.review-text{font-size:13px;line-height:1.55;color:hsla(0,0%,100%,.72);margin-bottom:10px}
+.review-stars{color:#fbbf24;font-size:11px;letter-spacing:1px}
+.cashout-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cashout-shot{aspect-ratio:9/16;border-radius:12px;overflow:hidden;border:1px solid hsl(17,15%,18%);background:hsl(17,10%,10%)}
+.cashout-shot img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.quiz-question{font-size:clamp(1.35rem,4.5vw,1.75rem);font-weight:800;line-height:1.25;margin-bottom:24px;color:#fff;max-width:400px}
+.quiz-header{width:100%;max-width:420px;margin-bottom:18px;text-align:center}
+.quiz-eyebrow{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#ffcbb6;margin-bottom:6px}
+.quiz-step{font-size:clamp(1.1rem,3.5vw,1.35rem);font-weight:800;color:#fff;margin-bottom:8px}
+.quiz-progress{display:flex;gap:8px;margin-bottom:28px}
+.quiz-dot{width:8px;height:8px;border-radius:50%;background:hsla(17,15%,30%,.6);transition:background .3s ease,transform .3s ease}
+.quiz-dot.active{background:#ffcbb6;transform:scale(1.15)}
+.quiz-dot.done{background:#ffcbb6;opacity:.45}
+.btn-neon{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;max-width:420px;padding:20px 40px;border:none;border-radius:16px;cursor:pointer;background:linear-gradient(180deg,#ffcbb6 0%,#f4bca4 100%);box-shadow:0 0 30px rgba(255,203,182,.5),0 0 60px rgba(255,203,182,.25),0 4px 15px hsla(0,0%,0%,.3);transition:all .2s ease;margin-bottom:12px;font:inherit}
+.btn-neon.btn-neon-cta{flex-direction:row;justify-content:center;align-items:center;gap:10px}
+.btn-neon-arrow{font-size:22px;font-weight:700;color:#150f0c;line-height:1;flex-shrink:0}
+.btn-neon:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(255,203,182,.6),0 0 80px rgba(255,203,182,.3),0 8px 25px hsla(0,0%,0%,.4)}
+.btn-neon:active{transform:translateY(1px) scale(.98);box-shadow:0 0 20px rgba(255,203,182,.4),0 0 40px rgba(255,203,182,.2)}
+.btn-neon .main{font-size:20px;font-weight:700;color:#150f0c}
+.btn-neon .sub{font-size:12px;color:rgba(21,15,12,.75)}
+.btn-quiz{display:flex;flex-direction:row;align-items:center;gap:12px;width:100%;max-width:420px;padding:18px 16px;border:1px solid hsla(17,15%,30%,.5);border-radius:16px;cursor:pointer;background:hsla(17,10%,12%,.5);transition:all .2s ease;margin-bottom:12px;font:inherit;text-align:left}
+.btn-quiz:hover{background:hsla(17,10%,15%,.7);border-color:rgba(255,203,182,.35)}
+.btn-quiz:active{transform:scale(.98)}
+.quiz-opt-icon{font-size:22px;flex-shrink:0;width:30px;text-align:center;line-height:1}
+.quiz-opt-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.btn-quiz .main{font-size:15px;font-weight:700;color:#fff;line-height:1.25}
+.btn-quiz .sub{font-size:12px;color:hsla(0,0%,100%,.45);line-height:1.3}
+.quiz-opt-radio{width:20px;height:20px;border-radius:50%;border:1.5px solid hsla(17,15%,30%,.6);flex-shrink:0}
+.btn-quiz-primary{border-color:rgba(255,203,182,.35);background:rgba(255,203,182,.08)}
+.btn-activate{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:420px;padding:16px 40px;border:none;border-radius:16px;cursor:pointer;background:linear-gradient(180deg,#ffcbb6 0%,#f4bca4 100%);box-shadow:0 0 30px rgba(255,203,182,.5),0 0 60px rgba(255,203,182,.25),0 4px 15px hsla(0,0%,0%,.3);transition:all .2s ease;margin-bottom:12px;text-decoration:none;color:inherit;font:inherit}
+.btn-activate:visited,.btn-activate:hover,.btn-activate:active{color:inherit;text-decoration:none}
+.btn-activate:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(255,203,182,.6),0 0 80px rgba(255,203,182,.3),0 8px 25px hsla(0,0%,0%,.4)}
+.btn-activate:active{transform:translateY(1px) scale(.98)}
+.btn-activate span{font-size:14px;font-weight:700;color:#150f0c;letter-spacing:.05em}
+.calc-wrap{width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center}
+.calc-spinner{width:72px;height:72px;border-radius:50%;border:3px solid hsla(17,15%,25%,.5);border-top-color:#ffcbb6;animation:spin .9s linear infinite;margin-bottom:28px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.calc-title{font-size:12px;font-weight:700;letter-spacing:.18em;color:#ffcbb6;margin-bottom:28px;text-align:center}
+.calc-steps{width:100%;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.calc-step{display:flex;align-items:center;justify-content:center;gap:12px;font-size:14px;color:hsla(0,0%,100%,.35);transition:color .4s ease}
+.calc-step.active{color:#fff}
+.calc-step.done{color:#ffcbb6}
+.calc-step-icon{width:20px;height:20px;border-radius:50%;border:2px solid hsla(17,15%,30%,.6);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .4s ease,background .4s ease}
+.calc-step.active .calc-step-icon{border-color:#ffcbb6;border-top-color:transparent;animation:spin .8s linear infinite}
+.calc-step.done .calc-step-icon{border-color:#ffcbb6;background:#ffcbb6;animation:none}
+.calc-step.done .calc-step-icon::after{content:'';width:6px;height:10px;border:solid #150f0c;border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px}
+.result-panel{width:100%;max-width:420px;background:hsl(17,10%,8%);border:1px solid hsl(17,15%,18%);border-radius:20px;padding:20px 20px 24px;text-align:center}
+.result-topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;text-align:left}
+.result-eyebrow{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:hsla(0,0%,100%,.4);margin-bottom:4px}
+.result-title{font-size:clamp(1.5rem,5vw,1.85rem);font-weight:800;line-height:1.1;color:#fff}
+.result-divider{height:2px;border-radius:999px;background:linear-gradient(90deg,#ffcbb6 0%,#e8a990 50%,rgba(255,203,182,.2) 100%);margin-bottom:20px}
+.result-ready-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,203,182,.45);background:rgba(255,203,182,.08);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#ffcbb6;margin-bottom:14px}
+.result-heading{font-size:clamp(1.35rem,4.5vw,1.65rem);font-weight:800;line-height:1.2;margin-bottom:18px;color:#fff}
+.estimate-card{background:hsl(17,10%,10%);border:1px solid hsl(17,15%,18%);border-radius:14px;padding:20px 16px;width:100%;margin-bottom:12px}
+.estimate-label{font-size:10px;font-weight:700;letter-spacing:.16em;color:hsla(0,0%,100%,.4);text-transform:uppercase;margin-bottom:10px}
+.estimate-amount{font-size:clamp(2.25rem,8vw,3rem);font-weight:900;line-height:1;letter-spacing:-.02em;background:linear-gradient(180deg,#ffffff 0%,#ffcbb6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.estimate-period{font-size:14px;color:hsla(0,0%,100%,.45);margin-top:6px}
+.boost-card{background:hsl(17,12%,7%);border:1px solid rgba(255,203,182,.28);border-radius:16px;padding:20px 18px 18px;width:100%;margin-bottom:18px;text-align:center;box-shadow:0 0 40px rgba(255,203,182,.06)}
+.boost-header{display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#ffcbb6;margin-bottom:14px}
+.boost-header-icon{font-size:15px;line-height:1}
+.boost-amount{font-size:clamp(2.35rem,8.5vw,3rem);font-weight:900;line-height:1;letter-spacing:-.02em;margin-bottom:14px;background:linear-gradient(90deg,#ffffff 0%,#ffcbb6 55%,#f4bca4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.boost-sep{height:1px;background:rgba(255,203,182,.15);margin-bottom:14px}
+.boost-steps{width:100%;display:flex;flex-direction:column;gap:14px;text-align:left}
+.boost-step{display:flex;gap:12px;align-items:flex-start}
+.boost-check{width:22px;height:22px;border-radius:50%;background:#ffcbb6;box-shadow:0 0 14px rgba(255,203,182,.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:900;color:#150f0c;line-height:1;margin-top:1px}
+.boost-step p{font-size:13px;color:hsla(0,0%,100%,.62);line-height:1.5}
+.boost-step strong{color:#ffcbb6;font-weight:700}
+.how-divider{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.how-divider::before,.how-divider::after{content:'';flex:1;height:1px;background:rgba(255,203,182,.2)}
+.how-divider span{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:hsla(0,0%,100%,.4);white-space:nowrap}
+.limited-label{font-size:11px;font-weight:800;letter-spacing:.12em;color:#ffcbb6;margin-bottom:10px;text-transform:uppercase}
+.cta-social{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:12px;color:hsla(0,0%,100%,.48);line-height:1.4}
+.cta-social strong{color:#fff;font-weight:700}
+.cta-live{width:8px;height:8px;border-radius:50%;background:#ffcbb6;box-shadow:0 0 0 2px rgba(255,203,182,.2),0 0 10px rgba(255,203,182,.55);flex-shrink:0;animation:livePulse 2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.92)}}
+.anim{opacity:0;animation:fadeSlideUp .5s ease forwards}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.screen{transition:opacity .4s ease;display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
+.screen.hidden{opacity:0;pointer-events:none;position:absolute}
+.screen.visible{opacity:1}
+.notif-zone{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:100;width:calc(100% - 32px);max-width:400px;pointer-events:none;height:70px}
+.notif-toast{position:absolute;top:0;left:0;right:0;background:hsl(17,10%,10%);border:1px solid hsl(17,15%,18%);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 24px rgba(255,203,182,.1);animation:toastIn .4s cubic-bezier(.16,1,.3,1) both;pointer-events:auto}
+@keyframes toastIn{from{opacity:0;transform:translateY(-20px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes toastOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-10px) scale(.96)}}
+.notif-toast.leaving{animation:toastOut .3s ease-in forwards}
+.notif-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,203,182,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.notif-icon img{width:24px;height:24px;border-radius:6px}
+.notif-body{flex:1;min-width:0}
+.notif-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif-title .notif-amount{color:#ffcbb6}
+.notif-desc{font-size:12px;color:hsla(0,0%,100%,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif-time{font-size:10px;color:hsla(0,0%,100%,.4);flex-shrink:0}
+@media(max-width:375px){.notif-toast{padding:12px 14px;gap:10px}.notif-icon{width:32px;height:32px}.notif-icon img{width:20px;height:20px}.notif-title{font-size:12px}.notif-desc{font-size:11px}.container{padding:84px 20px 28px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.notif-toast{animation:none!important}.calc-spinner,.calc-step.active .calc-step-icon{animation:none!important}}
+
+/* Locked offers carousel */
+.locked-offers{width:100%;margin:0 0 18px;padding:12px 0 10px;overflow:hidden;position:relative;border:1px solid rgba(255,203,182,.16);border-radius:14px;background:linear-gradient(180deg,rgba(255,203,182,.045),rgba(255,203,182,.018));}
+.locked-offers-title{margin:0 0 10px;text-align:center;color:rgba(255,255,255,.66);font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;}
+.locked-offers-window{overflow:hidden;mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);}
+.locked-offers-track{display:flex;width:max-content;animation:lockedOffersScroll 28s linear infinite;}
+.locked-offers:hover .locked-offers-track{animation-play-state:paused;}
+.locked-offers-group{display:flex;flex:none;gap:12px;padding:0 7px;}
+.locked-offer{width:72px;flex:none;text-align:center;}
+.locked-offer-art{width:64px;height:64px;margin:0 auto 5px;position:relative;overflow:hidden;border-radius:14px;background:#17191c;box-shadow:0 3px 12px rgba(0,0,0,.35);}
+.locked-offer-art img{display:block;width:100%;height:100%;object-fit:cover;}
+.locked-offer-lock{position:absolute;inset:0;display:grid;place-items:center;background:rgba(5,8,12,.20);}
+.locked-offer-lock svg{width:18px;height:20px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.8));}
+.locked-offer-name{display:block;overflow:hidden;color:rgba(255,255,255,.72);font-size:9px;font-weight:600;line-height:1.2;text-overflow:ellipsis;white-space:nowrap;}
+@keyframes lockedOffersScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.locked-offers-track{animation:none}.locked-offers-window{overflow-x:auto;mask-image:none;-webkit-mask-image:none}}
+
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="notif-zone" id="notifZone"></div>
+
+<div class="container">
+  <!-- Intro -->
+  <div id="screenIntro" class="screen visible">
+    <div class="logo-row anim" style="animation-delay:0s">
+      <img src="https://foryourwds.com/9SqgrG/__a/3c5ccfb69ca365aa8498500b504a97f57afb55ad.webp" alt="TikTok logo">
+      <span>x</span>
+      <img src="https://i.imgur.com/jH4TUk6.png" alt="Etc Pass logo">
+    </div>
+    <h1 class="headline anim" style="animation-delay:.1s">Get Paid To Game</h1>
+    <p class="subtext anim" style="animation-delay:.2s">Join thousands earning daily by scrolling TikTok and playing popular games like Roblox, Block Blast, 8 Ball Pool, etc.</p>
+    <div class="trust-section anim" style="animation-delay:.3s">
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-val">1.3M+</div><div class="stat-lbl">Members</div></div>
+        <div class="stat-box"><div class="stat-val">$500M</div><div class="stat-lbl">Paid out</div></div>
+        <div class="stat-box"><div class="stat-val">4.7<span class="star">★</span></div><div class="stat-lbl">Rated</div></div>
+      </div>
+    </div>
+    <button type="button" class="btn-neon btn-neon-cta anim" style="animation-delay:.4s" onclick="showScreen('screenQ1')">
+      <span class="main">See How Much You Can Earn</span>
+      <span class="btn-neon-arrow" aria-hidden="true">→</span>
+    </button>
+    <div class="trust-bar anim" style="animation-delay:.5s">
+      <div class="trust-label">Excellent</div>
+      <div class="trust-stars" aria-label="5 out of 5 stars">
+        <div class="trust-star" aria-hidden="true">★</div>
+        <div class="trust-star" aria-hidden="true">★</div>
+        <div class="trust-star" aria-hidden="true">★</div>
+        <div class="trust-star" aria-hidden="true">★</div>
+        <div class="trust-star" aria-hidden="true">★</div>
+      </div>
+      <div class="trust-name">Trustpilot</div>
+    </div>
+    <div class="social-proof anim" style="animation-delay:.6s">
+      <div class="social-section">
+        <div class="social-header">
+          <span class="social-label">Real players</span>
+          <span class="social-disclaimer">Results vary</span>
+        </div>
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" aria-hidden="true">MR</div>
+            <div class="review-meta"><span class="review-name">Maya R.</span><span class="tier-badge">Plus tier</span></div>
+          </div>
+          <p class="review-text">"Cashed out $527 in my first week just playing games. Took 5 minutes to set everything up."</p>
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </div>
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" aria-hidden="true">JT</div>
+            <div class="review-meta"><span class="review-name">Jordan T.</span><span class="tier-badge pro">Pro tier</span></div>
+          </div>
+          <p class="review-text">"So happy I unlocked the pro tier. The money hits my PayPal account the same day, and I get better games with higher rewards too. In my first month, I cashed out $2,000."</p>
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </div>
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" aria-hidden="true">SL</div>
+            <div class="review-meta"><span class="review-name">Sophia L.</span><span class="tier-badge">Plus tier</span></div>
+          </div>
+          <p class="review-text">"Way more legit than the other game apps I tried. They paid me out directly to cashapp and I didn't have to jump through hoops to get it."</p>
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="social-section">
+        <div class="social-header"><span class="social-label">Recent cashouts</span></div>
+        <div class="cashout-grid">
+          <div class="cashout-shot"><img src="https://foryourwds.com/9SqgrG/__a/308d77754a813a50111ee645fd427054ce9ee841.webp" alt="Player holding phone showing cash earned" loading="lazy"></div>
+          <div class="cashout-shot"><img src="https://foryourwds.com/9SqgrG/__a/1a3cc75b169749a7e68acebe2caffc598ce5fcf1.webp" alt="App showing available balance" loading="lazy"></div>
+          <div class="cashout-shot"><img src="https://foryourwds.com/9SqgrG/__a/8e441a5e58e664c82c682e24050cd3f4235bd6b7.webp" alt="Block Blast payout screenshot" loading="lazy"></div>
+        </div>
+        <button type="button" class="btn-neon btn-neon-cta social-cta" onclick="showScreen('screenQ1')">
+          <span class="main">See How Much You Can Earn</span>
+          <span class="btn-neon-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Q1 -->
+  <div id="screenQ1" class="screen hidden" style="display:none">
+    <div class="logo-row anim"><img src="https://foryourwds.com/9SqgrG/__a/3c5ccfb69ca365aa8498500b504a97f57afb55ad.webp" alt="TikTok logo"><span>x</span><img src="https://i.imgur.com/jH4TUk6.png" alt="Etc Pass logo"></div>
+    <div class="quiz-header anim" style="animation-delay:.05s"><p class="quiz-eyebrow">Earnings Quiz</p><p class="quiz-step">Step 1 of 3</p></div>
+    <div class="quiz-progress anim" style="animation-delay:.1s" aria-hidden="true"><span class="quiz-dot active"></span><span class="quiz-dot"></span><span class="quiz-dot"></span></div>
+    <h2 class="quiz-question anim" style="animation-delay:.15s">Which device do you use?</h2>
+    <button type="button" class="btn-quiz btn-quiz-primary anim" style="animation-delay:.25s" onclick="showScreen('screenQ2')">
+      <span class="quiz-opt-icon" aria-hidden="true">🍎</span>
+      <span class="quiz-opt-text"><span class="main">I'm on an iPhone / iPad</span><span class="sub">iOS &amp; Mac users — highest payouts</span></span>
+      <span class="quiz-opt-radio" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn-quiz anim" style="animation-delay:.35s" onclick="showScreen('screenQ2')">
+      <span class="quiz-opt-icon" aria-hidden="true">🤖</span>
+      <span class="quiz-opt-text"><span class="main">I'm on an Android / Other</span><span class="sub">Android, Windows, and other devices</span></span>
+      <span class="quiz-opt-radio" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <!-- Quiz Q2 -->
+  <div id="screenQ2" class="screen hidden" style="display:none">
+    <div class="logo-row anim"><img src="https://foryourwds.com/9SqgrG/__a/3c5ccfb69ca365aa8498500b504a97f57afb55ad.webp" alt="TikTok logo"><span>x</span><img src="https://i.imgur.com/jH4TUk6.png" alt="Etc Pass logo"></div>
+    <div class="quiz-header anim" style="animation-delay:.05s"><p class="quiz-eyebrow">Earnings Quiz</p><p class="quiz-step">Step 2 of 3</p></div>
+    <div class="quiz-progress anim" style="animation-delay:.1s" aria-hidden="true"><span class="quiz-dot done"></span><span class="quiz-dot active"></span><span class="quiz-dot"></span></div>
+    <h2 class="quiz-question anim" style="animation-delay:.15s">Do you want to make money scrolling TikTok or playing mobile games?</h2>
+    <button type="button" class="btn-quiz btn-quiz-primary anim" style="animation-delay:.25s" onclick="showScreen('screenQ3')">
+      <span class="quiz-opt-icon" aria-hidden="true">📱</span>
+      <span class="quiz-opt-text"><span class="main">Scrolling TikTok more</span><span class="sub">Paid watch time, discovery &amp; browsing</span></span>
+      <span class="quiz-opt-radio" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn-quiz anim" style="animation-delay:.35s" onclick="showScreen('screenQ3')">
+      <span class="quiz-opt-icon" aria-hidden="true">🎮</span>
+      <span class="quiz-opt-text"><span class="main">Playing mobile games more</span><span class="sub">Roblox, Block Blast, 8 Ball Pool &amp; more</span></span>
+      <span class="quiz-opt-radio" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn-quiz anim" style="animation-delay:.45s" onclick="showScreen('screenQ3')">
+      <span class="quiz-opt-icon" aria-hidden="true">⚡</span>
+      <span class="quiz-opt-text"><span class="main">Both equally</span><span class="sub">Maximize your daily payout potential</span></span>
+      <span class="quiz-opt-radio" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <!-- Quiz Q3 -->
+  <div id="screenQ3" class="screen hidden" style="display:none">
+    <div class="logo-row anim"><img src="https://foryourwds.com/9SqgrG/__a/3c5ccfb69ca365aa8498500b504a97f57afb55ad.webp" alt="TikTok logo"><span>x</span><img src="https://i.imgur.com/jH4TUk6.png" alt="Etc Pass logo"></div>
+    <div class="quiz-header anim" style="animation-delay:.05s"><p class="quiz-eyebrow">Earnings Quiz</p><p class="quiz-step">Step 3 of 3</p></div>
+    <div class="quiz-progress anim" style="animation-delay:.1s" aria-hidden="true"><span class="quiz-dot done"></span><span class="quiz-dot done"></span><span class="quiz-dot active"></span></div>
+    <h2 class="quiz-question anim" style="animation-delay:.15s">How much time can you spend per day?</h2>
+    <button type="button" class="btn-quiz anim" style="animation-delay:.25s" onclick="startCalculating()">
+      <span class="quiz-opt-icon" aria-hidden="true">⏱️</span>
+      <span class="quiz-opt-text"><span class="main">Less than 1 hour</span></span>
+      <span class="quiz-opt-radio" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn-quiz anim" style="animation-delay:.35s" onclick="startCalculating()">
+      <span class="quiz-opt-icon" aria-hidden="true">⏰</span>
+      <span class="quiz-opt-text"><span class="main">1 to 3 hours</span></span>
+      <span class="quiz-opt-radio" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn-quiz anim" style="animation-delay:.45s" onclick="startCalculating()">
+      <span class="quiz-opt-icon" aria-hidden="true">🔥</span>
+      <span class="quiz-opt-text"><span class="main">More than 3 hours</span></span>
+      <span class="quiz-opt-radio" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <!-- Calculating -->
+  <div id="screenCalc" class="screen hidden" style="display:none">
+    <div class="calc-wrap">
+      <div class="calc-spinner" aria-hidden="true"></div>
+      <p class="calc-title anim" style="animation-delay:.1s">CALCULATING YOUR ESTIMATE…</p>
+      <div class="calc-steps">
+        <div class="calc-step anim" id="calcStep1" style="animation-delay:.2s"><span class="calc-step-icon" aria-hidden="true"></span><span>Matching available offers</span></div>
+        <div class="calc-step anim" id="calcStep2" style="animation-delay:.3s"><span class="calc-step-icon" aria-hidden="true"></span><span>Calculating base earnings</span></div>
+        <div class="calc-step anim" id="calcStep3" style="animation-delay:.4s"><span class="calc-step-icon" aria-hidden="true"></span><span>Applying boosted rate</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div id="screenResult" class="screen hidden" style="display:none">
+    <div class="result-panel anim" style="animation-delay:0s">
+      <div class="result-topbar">
+        <div>
+          <p class="result-eyebrow">Earnings Quiz</p>
+          <h2 class="result-title">Your estimate</h2>
+        </div>
+      </div>
+      <div class="result-divider" aria-hidden="true"></div>
+      <div class="result-ready-pill anim" style="animation-delay:.05s">✓ Estimate ready</div>
+      <h3 class="result-heading anim" style="animation-delay:.1s">Here's what you can earn</h3>
+      <div class="estimate-card anim" style="animation-delay:.15s">
+        <p class="estimate-label">Your estimate</p>
+        <p class="estimate-amount">$120 – $320</p>
+        <p class="estimate-period">daily</p>
+      </div>
+      <div class="boost-card anim" style="animation-delay:.2s">
+        <p class="boost-header"><span class="boost-header-icon" aria-hidden="true">⚡</span> Next steps to start earning</p>
+        <div class="boost-steps">
+          <div class="boost-step">
+            <span class="boost-check" aria-hidden="true">1</span>
+            <p>On the next screen, <strong>add the Sushi Pass to your Apple Wallet</strong> to activate your pass and start earning.</p>
+          </div>
+          <div class="boost-step">
+            <span class="boost-check" aria-hidden="true">2</span>
+            <p>Complete <strong>3 starter offers</strong> to unlock <strong>Pay to Scroll TikTok and other top offers</strong> and start cashing out.</p>
+          </div>
+        </div>
+      </div>
+      <section class="locked-offers anim" style="animation-delay:.23s" aria-label="Popular offers that unlock after completing starter offers">
+        <p class="locked-offers-title">Popular offers to unlock</p>
+        <div class="locked-offers-window">
+          <div class="locked-offers-track">
+          <div class="locked-offers-group">
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://play-lh.googleusercontent.com/RBnqZ3q_jjOREX6v49DGe4BzKGNwJMcv8aBNDeDuMRFQdyX6rA7S-k5N39ggj43XeKFGLmxuH1jOYONfbUHmYA" alt="Royal Match offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Royal Match</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://play-lh.googleusercontent.com/5MLgC2WWXcq1Pol8qRAXOKzIJY9qySkjF43DnWyd5F9fPj_heinHeIxvgIpPQwcaQ1w-mUzUmoP1Xeslf29irg" alt="Dice Dreams offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Dice Dreams</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://m.media-amazon.com/images/I/81Uz9nlYUYL.png" alt="Subway Surfers offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Subway Surfers</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://m.media-amazon.com/images/I/21aoUPG3svL.png" alt="Roblox offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Roblox</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://m.media-amazon.com/images/I/81Iaj1F8MxL.png" alt="Monopoly GO offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Monopoly GO</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://store-images.s-microsoft.com/image/apps.11067.13510798882606697.efaa0e3a-be90-4565-97e8-abea62f547f1.da87eda1-b8cb-4f1c-9f66-e486d53e8006" alt="Candy Crush offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Candy Crush</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://img.magnific.com/premium-vector/tik-tok-logo_578229-290.jpg" alt="TikTok offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">TikTok</span>
+            </div>
+          </div>
+          <div class="locked-offers-group" aria-hidden="true">
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://play-lh.googleusercontent.com/RBnqZ3q_jjOREX6v49DGe4BzKGNwJMcv8aBNDeDuMRFQdyX6rA7S-k5N39ggj43XeKFGLmxuH1jOYONfbUHmYA" alt="Royal Match offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Royal Match</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://play-lh.googleusercontent.com/5MLgC2WWXcq1Pol8qRAXOKzIJY9qySkjF43DnWyd5F9fPj_heinHeIxvgIpPQwcaQ1w-mUzUmoP1Xeslf29irg" alt="Dice Dreams offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Dice Dreams</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://m.media-amazon.com/images/I/81Uz9nlYUYL.png" alt="Subway Surfers offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Subway Surfers</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://m.media-amazon.com/images/I/21aoUPG3svL.png" alt="Roblox offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Roblox</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://m.media-amazon.com/images/I/81Iaj1F8MxL.png" alt="Monopoly GO offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Monopoly GO</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://store-images.s-microsoft.com/image/apps.11067.13510798882606697.efaa0e3a-be90-4565-97e8-abea62f547f1.da87eda1-b8cb-4f1c-9f66-e486d53e8006" alt="Candy Crush offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">Candy Crush</span>
+            </div>
+            <div class="locked-offer">
+              <div class="locked-offer-art"><img src="https://img.magnific.com/premium-vector/tik-tok-logo_578229-290.jpg" alt="TikTok offer" loading="lazy">
+                <span class="locked-offer-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="5" y="10" width="14" height="11" rx="2" fill="rgba(8,12,18,.78)" stroke="white" stroke-width="1.7"/><circle cx="12" cy="15" r="1.2" fill="white"/><path d="M12 16v2" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              </div>
+              <span class="locked-offer-name">TikTok</span>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+      <p class="limited-label anim" style="animation-delay:.25s">Start now — limited spots</p>
+      <a class="btn-activate anim" id="ctaBtn" style="animation-delay:.3s" href="https://www.pcbdfv7trk.com/QZ85XF/383DP59/">
+        <span>START EARNING NOW →</span>
+      </a>
+      <p class="cta-social anim" style="animation-delay:.32s">
+        <span class="cta-live" aria-hidden="true"></span>
+        <span><strong id="bonusClaimCount">705</strong> people claimed their pass in the last hour</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Base CTA URL
+  var CTA_BASE_URL = "https://www.pcbdfv7trk.com/QZ85XF/383DP59/";
+
+  function getForwardedUrl(baseUrl) {
+    try {
+      var url = new URL(baseUrl);
+      var currentParams = new URLSearchParams(window.location.search);
+      var subKeys = ["sub1", "sub2", "sub3", "sub4", "sub5"];
+      subKeys.forEach(function(key) {
+        if (currentParams.has(key)) {
+          url.searchParams.set(key, currentParams.get(key));
+        }
+      });
+      return url.toString();
+    } catch (e) {
+      var currentParams = new URLSearchParams(window.location.search);
+      var subKeys = ["sub1", "sub2", "sub3", "sub4", "sub5"];
+      var queryParts = [];
+      subKeys.forEach(function(key) {
+        if (currentParams.has(key)) {
+          queryParts.push(encodeURIComponent(key) + "=" + encodeURIComponent(currentParams.get(key)));
+        }
+      });
+      if (queryParts.length > 0) {
+        var sep = baseUrl.indexOf("?") !== -1 ? "&" : "?";
+        return baseUrl + sep + queryParts.join("&");
+      }
+      return baseUrl;
+    }
+  }
+
+  var CTA_URL = getForwardedUrl(CTA_BASE_URL);
+
+  function syncCtaUrls() {
+    var cta = document.getElementById("ctaBtn");
+    if (cta) {
+      cta.href = getForwardedUrl(CTA_BASE_URL);
+      cta.addEventListener("click", function() {
+        this.href = getForwardedUrl(CTA_BASE_URL);
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", syncCtaUrls);
+  } else {
+    syncCtaUrls();
+  }
+
+  var currentScreen = 'screenIntro';
+  var bonusClaimTimer = null;
+
+  function startBonusClaimCounter() {
+    if (bonusClaimTimer) { clearInterval(bonusClaimTimer); bonusClaimTimer = null; }
+    var el = document.getElementById('bonusClaimCount');
+    if (!el) return;
+    var count = 680 + Math.floor(Math.random() * 40);
+    el.textContent = String(count);
+    bonusClaimTimer = setInterval(function() {
+      count += Math.random() > 0.75 ? 2 : 1;
+      el.textContent = String(count);
+    }, 4000);
+  }
+
+  function stopBonusClaimCounter() {
+    if (bonusClaimTimer) { clearInterval(bonusClaimTimer); bonusClaimTimer = null; }
+  }
+
+  function showScreen(nextId) {
+    var current = document.getElementById(currentScreen);
+    var next = document.getElementById(nextId);
+    if (!current || !next || currentScreen === nextId) return;
+    current.classList.remove('visible');
+    current.classList.add('hidden');
+    setTimeout(function() {
+      current.style.display = 'none';
+      next.style.display = '';
+      next.classList.remove('hidden');
+      next.classList.add('visible');
+      next.querySelectorAll('.anim').forEach(function(el) {
+        el.style.animation = 'none';
+        el.offsetHeight;
+        el.style.animation = '';
+      });
+      if (nextId === 'screenCalc') {
+        var spinner = next.querySelector('.calc-spinner');
+        if (spinner) { spinner.style.animation = 'none'; spinner.offsetHeight; spinner.style.removeProperty('animation'); }
+      }
+      if (nextId === 'screenResult') { startBonusClaimCounter(); }
+      else { stopBonusClaimCounter(); }
+      currentScreen = nextId;
+    }, 400);
+  }
+
+  function startCalculating() {
+    showScreen('screenCalc');
+    runCalcSequence();
+  }
+
+  function runCalcSequence() {
+    var steps = [
+      document.getElementById('calcStep1'),
+      document.getElementById('calcStep2'),
+      document.getElementById('calcStep3')
+    ];
+    var delays = [600, 1400, 2200];
+    var doneDelays = [1200, 2000, 2800];
+    steps.forEach(function(step, i) {
+      setTimeout(function() { step.classList.add('active'); }, delays[i]);
+      setTimeout(function() { step.classList.remove('active'); step.classList.add('done'); }, doneDelays[i]);
+    });
+    setTimeout(function() { showScreen('screenResult'); }, 3400);
+  }
+
+  // Notification toasts
+  (function() {
+    var firstNames = ['Jake','Mia','Chris','Sara','Alex','Jordan','Taylor','Morgan','Riley','Casey','Avery','Quinn','Drew','Sam','Emma','Noah','Olivia','Ethan','Sophia','Liam','Chloe','Mason','Isabella','Lucas','Harper','Ryan','Nina','Tyler','Grace','Dylan'];
+    var lastInitials = ['A','B','C','D','E','F','G','H','J','K','L','M','N','P','R','S','T','V','W','Y'];
+    var messages = [
+      {t:'Hit 5,000m in Subway Surfers',a:'+$14.50'},{t:'Reached level 20 in Coin Master',a:'+$8.20'},
+      {t:'Won a Solitaire Cash match',a:'+$5.75'},{t:'Finished Match Masters quest',a:'+$22.00'},
+      {t:'Cashed out via PayPal',a:'+$42.00'},{t:'Completed Roblox featured offer',a:'+$12.40'},
+      {t:'Won 3 matches in 8 Ball Pool',a:'+$9.60'},{t:'Finished Bingo Blitz daily quest',a:'+$6.15'},
+      {t:'Cashed out to Venmo',a:'+$28.30'},{t:'Finished Monopoly GO board',a:'+$15.20'},
+      {t:'Played 2 hours of featured games',a:'+$24.00'}
+    ];
+    var times = ['just now','1s ago','2s ago','3s ago','4s ago','5s ago'];
+    var notifZone = document.getElementById('notifZone');
+    var notifActive = false;
+
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+    function showNotif() {
+      if (!notifActive) return;
+      var msg = pick(messages);
+      var name = pick(firstNames) + ' ' + pick(lastInitials) + '.';
+      var toast = document.createElement('div');
+      toast.className = 'notif-toast';
+
+      var icon = document.createElement('div'); icon.className = 'notif-icon';
+      var iconImg = document.createElement('img');
+      iconImg.src = 'https://i.imgur.com/jH4TUk6.png';
+      iconImg.alt = 'ETC'; icon.appendChild(iconImg);
+
+      var body = document.createElement('div'); body.className = 'notif-body';
+      var title = document.createElement('div'); title.className = 'notif-title';
+      title.appendChild(document.createTextNode(name + ' earned '));
+      var amt = document.createElement('span'); amt.className = 'notif-amount'; amt.textContent = msg.a;
+      title.appendChild(amt);
+      var desc = document.createElement('div'); desc.className = 'notif-desc'; desc.textContent = msg.t;
+      body.appendChild(title); body.appendChild(desc);
+
+      var time = document.createElement('div'); time.className = 'notif-time'; time.textContent = pick(times);
+
+      toast.appendChild(icon); toast.appendChild(body); toast.appendChild(time);
+
+      var old = notifZone.querySelector('.notif-toast');
+      if (old) {
+        old.classList.add('leaving');
+        setTimeout(function() { if (old.parentNode) old.parentNode.removeChild(old); notifZone.appendChild(toast); }, 300);
+      } else {
+        notifZone.appendChild(toast);
+      }
+      setTimeout(function() {
+        toast.classList.add('leaving');
+        setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+      }, 3500);
+    }
+
+    function startNotifs() {
+      if (notifActive) return;
+      notifActive = true;
+      setTimeout(showNotif, 2000);
+      (function next() {
+        setTimeout(function() { if (notifActive) { showNotif(); next(); } }, 5500 + Math.random() * 2500);
+      })();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startNotifs);
+    } else {
+      startNotifs();
+    }
+  })();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"654f17ab074240d48ed9fe2847b55176","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
