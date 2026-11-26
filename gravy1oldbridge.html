@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#08120E">
+<title>Continue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08120E;
+    --surface: #0F1F18;
+    --line: rgba(0, 214, 79, 0.18);
+    --green: #00D64F;
+    --green-deep: #00A83E;
+    --text: #F2FFF6;
+    --muted: #8FA89A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+      radial-gradient(60% 45% at 50% 0%, rgba(0, 214, 79, 0.16), transparent 70%),
+      var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .grid {
+    position: fixed; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(0,214,79,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,214,79,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 80%);
+  }
+  main {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, rgba(15,31,24,0.95), rgba(10,22,17,0.95));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 36px 28px 28px;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green);
+    background: rgba(0,214,79,0.08);
+    border: 1px solid var(--line);
+    padding: 6px 12px; border-radius: 999px;
+  }
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    box-shadow: 0 0 0 0 rgba(0,214,79,0.6);
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,214,79,0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(0,214,79,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,214,79,0); }
+  }
+  .ring {
+    position: relative;
+    width: 112px; height: 112px;
+    margin: 28px auto 24px;
+  }
+  .ring > svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring .check svg { width: 44px; height: 44px; display: block; }
+  .ring .track { stroke: rgba(0,214,79,0.12); }
+  .ring .bar {
+    stroke: var(--green);
+    stroke-dasharray: 339.3;
+    stroke-dashoffset: 339.3;
+    animation: fill 1.8s cubic-bezier(.6,.1,.2,1) forwards;
+    filter: drop-shadow(0 0 6px rgba(0,214,79,0.5));
+  }
+  @keyframes fill { to { stroke-dashoffset: 0; } }
+  .ring .check {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: scale(0.6);
+    animation: pop 0.4s 1.7s ease-out forwards;
+  }
+  @keyframes pop { to { opacity: 1; transform: scale(1); } }
+  h1 {
+    font-size: clamp(32px, 9vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  h1 span { color: var(--green); }
+  p.sub {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .cta {
+    margin-top: 28px;
+    width: 100%;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--green);
+    color: #04140A;
+    font: inherit; font-size: 17px; font-weight: 800;
+    padding: 18px 24px;
+    border: 0; border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,214,79,0.28), inset 0 -3px 0 var(--green-deep);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  .cta:hover { filter: brightness(1.06); box-shadow: 0 14px 36px rgba(0,214,79,0.38), inset 0 -3px 0 var(--green-deep); }
+  .cta:active { transform: translateY(2px); box-shadow: 0 6px 18px rgba(0,214,79,0.25), inset 0 -1px 0 var(--green-deep); }
+  .cta:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .cta svg { transition: transform .2s ease; }
+  .cta:hover svg { transform: translateX(3px); }
+  .foot {
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.06em;
+    color: var(--muted);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dot, .ring .bar, .ring .check { animation: none; }
+    .ring .bar { stroke-dashoffset: 0; }
+    .ring .check { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="grid" aria-hidden="true"></div>
+
+  <main>
+    <div class="status"><span class="dot" aria-hidden="true"></span>Verified</div>
+
+    <div class="ring" aria-hidden="true">
+      <svg viewBox="0 0 120 120">
+        <circle class="track" cx="60" cy="60" r="54" fill="none" stroke-width="6"/>
+        <circle class="bar" cx="60" cy="60" r="54" fill="none" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+      <div class="check">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D64F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+    </div>
+
+    <h1>You&apos;re <span>ready.</span></h1>
+    <p class="sub">Tap continue to head to the next step.</p>
+
+    <button class="cta" type="button" onclick="handleContinue()">
+      Continue
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+
+    <div class="foot">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      Secure redirect
+    </div>
+  </main>
+
+  <script>
+    var AFFILIATE_LINK = "https://tiktokdeals.org/gravy1old";
+
+    function getParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    function appendParam(url, key, value) {
+      if (!value) return url;
+      var separator = url.indexOf('?') !== -1 ? '&' : '?';
+      return url + separator + key + '=' + encodeURIComponent(value);
+    }
+
+    function isAndroid() {
+      return /Android/i.test(navigator.userAgent);
+    }
+
+    function openInExternalBrowser(url) {
+      if (isAndroid()) {
+        try {
+          var parsed = new URL(url);
+          window.location.href = 'intent://' + parsed.hostname + parsed.pathname + parsed.search + parsed.hash + '#Intent;scheme=https;end;';
+        } catch (e) {
+          window.location.href = url;
+        }
+      } else {
+        window.location.href = url.replace(/^https:\/\//, 'x-safari-https://').replace(/^http:\/\//, 'x-safari-http://');
+      }
+    }
+
+    function handleContinue() {
+      var dest = getParam('dest');
+      var url = dest ? decodeURIComponent(dest) : AFFILIATE_LINK;
+
+      new URLSearchParams(window.location.search).forEach(function (value, key) {
+        if (key === 'dest') return;
+        if (url.indexOf(key + '=') === -1) url = appendParam(url, key, value);
+      });
+
+      openInExternalBrowser(url);
+    }
+  </script>
+</body>
+</html>
